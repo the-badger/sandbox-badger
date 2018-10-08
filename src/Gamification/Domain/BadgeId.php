@@ -11,8 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace %namespace%;
+namespace Badger\Gamification\Domain;
 
-final class %name%
+use Ramsey\Uuid\Uuid;
+
+final class BadgeId
 {
+    private $uuid;
+
+    public function __construct(Uuid $uuid)
+    {
+        $this->uuid = $uuid;
+    }
 }

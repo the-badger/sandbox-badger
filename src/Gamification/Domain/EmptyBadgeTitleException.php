@@ -11,8 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace %namespace%;
+namespace Badger\Gamification\Domain;
 
-final class %name%
+final class EmptyBadgeTitleException extends \InvalidArgumentException
 {
 }

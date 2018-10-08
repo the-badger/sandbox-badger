@@ -12,6 +12,10 @@ run-gamification-cs:
 run-gamification-phpspec:
 	vendor/bin/phpspec run --config config/tests/gamification/phpspec.yml
 
+.PHONY: run-gamification-phpspec-desc
+run-gamification-phpspec-desc:
+	vendor/bin/phpspec describe --config config/tests/gamification/phpspec.yml
+
 .PHONY: run-gamification-acceptance
 run-gamification-acceptance:
 	vendor/bin/behat -p gamification_acceptance -f progress -c config/tests/gamification/behat.yml

@@ -1,6 +1,7 @@
 suites:
-  Cartography:
+  Gamification:
     namespace: Badger\Gamification
-    psr4_prefix: Badger
+    psr4_prefix: Badger\Gamification
     spec_path: src/Gamification/Test
+    src_path: src/Gamification
     spec_prefix: Specification

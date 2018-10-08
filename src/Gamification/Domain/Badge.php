@@ -11,8 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace %namespace%;
+namespace Badger\Gamification\Domain;
 
-final class %name%
+final class Badge
 {
+    /** @var BadgeId */
+    private $badgeId;
+
+    public function __construct(BadgeId $badgeId)
+    {
+        $this->badgeId = $badgeId;
+    }
 }
