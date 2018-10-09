@@ -9,4 +9,6 @@ install:
     - composer install --prefer-dist --no-interaction
 
 script:
+    - make stan
     - make run-gamification-phpspec
+    - make run-gamification-cs
