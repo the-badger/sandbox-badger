@@ -1,0 +1,12 @@
+language: php
+php:
+    - '7.1'
+
+before_install:
+    - composer self-update --no-interaction
+
+install:
+    - composer install --prefer-dist --no-interaction
+
+script:
+    - make run-gamification-phpspec
