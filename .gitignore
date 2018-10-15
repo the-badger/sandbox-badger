@@ -8,6 +8,7 @@
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
+var/*
 /var/cache/*
 /var/logs/*
 /var/sessions/*
@@ -46,3 +47,8 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
