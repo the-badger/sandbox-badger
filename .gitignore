@@ -41,6 +41,12 @@
 # Composer PHAR
 /composer.phar
 
+# Docker
+docker-compose.override.yml
+
+# Env
+.env
+
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 

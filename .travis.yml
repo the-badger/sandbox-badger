@@ -1,12 +1,15 @@
-language: php
-php:
-    - '7.1'
+sudo: required
 
-before_install:
-    - composer self-update --no-interaction
+services:
+  - docker
+
+env:
+  - DOCKER_PORT_HTTP=8080
 
 install:
-    - composer install --prefer-dist --no-interaction
+    - make start
+    - chmod -R 777 ./
+    - make install
 
 script:
     - make run-gamification-phpspec
