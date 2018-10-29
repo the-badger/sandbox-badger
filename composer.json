@@ -17,7 +17,7 @@
         "behat/behat": "^3.4",
         "friends-of-behat/context-service-extension": "^1.0",
         "friends-of-behat/cross-container-extension": "^1.0",
-        "friends-of-behat/symfony-extension": "^1.3",
+        "friends-of-behat/symfony-extension": "issue_39-dev",
         "friendsofphp/php-cs-fixer": "^2.3",
         "phpspec/phpspec": "^5.0",
         "phpstan/phpstan": "^0.10.3"
@@ -33,6 +33,13 @@
             "Badger\\": "src/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/solivier/SymfonyExtension.git",
+            "branch": "master"
+        }
+    ],
     "replace": {
         "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
