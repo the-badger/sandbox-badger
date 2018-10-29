@@ -35,6 +35,10 @@ down: ## Down the project
 install: ## Composer install
 	docker-compose exec fpm composer install
 
+.PHONY: update
+update: ## Composer update
+	docker-compose exec fpm composer update
+
 ##################################################### Gamification #####################################################
 .PHONY: run-gamification-cs
 run-gamification-cs: ## Run Gamification Coding Style fixer

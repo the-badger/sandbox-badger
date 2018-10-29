@@ -1,0 +1,19 @@
+gamification_acceptance:
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      env_file: ../.env_test_in_memory
+      kernel:
+        class: 'Badger\SharedSpace\Application\Kernel'
+        bootstrap: ~
+    FriendsOfBehat\ContextServiceExtension:
+      imports:
+      - 'services/acceptance/context.yml'
+    FriendsOfBehat\CrossContainerExtension: ~
+  suites:
+    default:
+      paths:
+        features: '%paths.base%/../../../../features/gamification'
+      contexts_services:
+        - 'Badger\Gamification\Test\Acceptance\Context\SomeoneSignUp'
+      filters:
+        tags: '@acceptance&&~@skip'
