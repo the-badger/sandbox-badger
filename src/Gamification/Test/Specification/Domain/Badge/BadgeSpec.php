@@ -1,10 +1,10 @@
 <?php
 
-namespace Specification\Badger\Gamification\Domain;
+namespace Specification\Badger\Gamification\Domain\Badge;
 
-use Badger\Gamification\Domain\Badge;
-use Badger\Gamification\Domain\BadgeId;
-use Badger\Gamification\Domain\BadgeTitle;
+use Badger\Gamification\Domain\Badge\Badge;
+use Badger\Gamification\Domain\Badge\BadgeId;
+use Badger\Gamification\Domain\Badge\BadgeTitle;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
 

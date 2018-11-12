@@ -1,9 +1,9 @@
 <?php
 
-namespace Specification\Badger\Gamification\Domain;
+namespace Specification\Badger\Gamification\Domain\Badge;
 
-use Badger\Gamification\Domain\BadgeTitle;
-use Badger\Gamification\Domain\EmptyBadgeTitleException;
+use Badger\Gamification\Domain\Badge\BadgeTitle;
+use Badger\Gamification\Domain\Badge\EmptyBadgeTitleException;
 use PhpSpec\ObjectBehavior;
 
 class BadgeTitleSpec extends ObjectBehavior

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Badger\Gamification\Domain;
+namespace Badger\Gamification\Domain\Badge;
 
 use Webmozart\Assert\Assert;
 

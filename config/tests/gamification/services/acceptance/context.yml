@@ -1,4 +1,6 @@
 services:
     Badger\Gamification\Test\Acceptance\Context\SomeoneSignUp:
+        arguments:
+            $bus: '@__symfony__.command_bus'
         tags:
             - { name: fob.context_service }

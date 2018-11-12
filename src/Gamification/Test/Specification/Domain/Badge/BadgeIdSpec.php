@@ -1,10 +1,9 @@
 <?php
 
-namespace Specification\Badger\Gamification\Domain;
+namespace Specification\Badger\Gamification\Domain\Badge;
 
-use Badger\Gamification\Domain\BadgeId;
+use Badger\Gamification\Domain\Badge\BadgeId;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
 
 class BadgeIdSpec extends ObjectBehavior

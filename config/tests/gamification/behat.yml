@@ -12,7 +12,7 @@ gamification_acceptance:
   suites:
     default:
       paths:
-        features: '%paths.base%/../../../../features/gamification'
+        features: '%paths.base%/../../../features/gamification'
       contexts_services:
         - 'Badger\Gamification\Test\Acceptance\Context\SomeoneSignUp'
       filters:
