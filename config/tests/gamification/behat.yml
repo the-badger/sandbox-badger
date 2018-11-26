@@ -3,7 +3,7 @@ gamification_acceptance:
     FriendsOfBehat\SymfonyExtension:
       env_file: ../.env_test_in_memory
       kernel:
-        class: 'Badger\SharedSpace\Application\Kernel'
+        class: 'Badger\SharedSpace\Symfony\Kernel'
         bootstrap: ~
     FriendsOfBehat\ContextServiceExtension:
       imports:

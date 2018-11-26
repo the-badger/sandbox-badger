@@ -1,0 +1,6 @@
+services:
+     ### handler
+    Badger\Gamification\Application\SignUpHandler:
+        public: true
+        tags:
+            - { name: command_handler, handles: 'Badger\Gamification\Application\SignUp' }
