@@ -18,7 +18,7 @@ final class InvalidBadgerMemberNameException extends \InvalidArgumentException
     public function __construct(int $currentLength)
     {
         $this->message = sprintf(
-            'The Badger User Name should contain between 2 and 255 caracteres, currently %s',
+            'The Badger User Name should contain between 2 and 255 characters, currently %s',
             $currentLength
         );
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4caea5e642fe2fbeb91cb6f457027cb2",
+    "content-hash": "5214a7f38a19084848bbb68f25d1269b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -179,6 +179,52 @@
                 "service proxies"
             ],
             "time": "2018-09-27T13:45:01+00:00"
+        },
+        {
+            "name": "phunkie/phunkie",
+            "version": "0.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phunkie/phunkie.git",
+                "reference": "cd8d4c494fa5c6f1f94cdb846ccd945c29302014"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phunkie/phunkie/zipball/cd8d4c494fa5c6f1f94cdb846ccd945c29302014",
+                "reference": "cd8d4c494fa5c6f1f94cdb846ccd945c29302014",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "bossa/phpspec2-expect": "~2.2",
+                "giorgiosironi/eris": "~0.7",
+                "phpspec/phpspec": "~3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": [
+                        "src/"
+                    ]
+                },
+                "files": [
+                    "src/Phunkie/Functions/common.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcello Duarte",
+                    "homepage": "http://marcelloduarte.net/"
+                }
+            ],
+            "description": "Functional structures library for PHP",
+            "time": "2018-01-09T10:16:17+00:00"
         },
         {
             "name": "psr/cache",

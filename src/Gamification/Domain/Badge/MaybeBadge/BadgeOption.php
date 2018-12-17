@@ -15,7 +15,20 @@ declare(strict_types=1);
 namespace Badger\Gamification\Domain\Badge\MaybeBadge;
 
 
+use Phunkie\Types\Option;
+
 class BadgeOption
 {
+    /** @var Option */
+    private $option;
 
+    public function __construct(Option $option)
+    {
+        $this->option = $option;
+    }
+
+    public function option(): Option
+    {
+        return $this->option;
+    }
 }

@@ -15,7 +15,11 @@ declare(strict_types=1);
 namespace Badger\Gamification\Domain\Badge;
 
 
+use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
+
 interface BadgeRepository
 {
+    public function save(Badge $badge): void;
 
+    public function get(BadgeId $badgeId): BadgeOption;
 }

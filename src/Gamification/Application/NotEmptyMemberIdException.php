@@ -11,20 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Badger\Gamification\Domain\Badge;
+namespace Badger\Gamification\Application;
 
-final class Badge
+final class NotEmptyMemberIdException extends \InvalidArgumentException
 {
-    /** @var BadgeId */
-    private $badgeId;
-
-    public function __construct(BadgeId $badgeId)
+    public function __construct()
     {
-        $this->badgeId = $badgeId;
-    }
-
-    public function id(): BadgeId
-    {
-        return $this->badgeId;
+        $this->message = 'The member id should not be empty';
     }
 }

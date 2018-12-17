@@ -24,4 +24,9 @@ final class BadgeId
     {
         $this->uuid = $uuid;
     }
+
+    public function __toString(): string
+    {
+        return $this->uuid->toString();
+    }
 }
