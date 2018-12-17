@@ -18,13 +18,22 @@ final class Member
     /** @var MemberId */
     private $id;
 
-    public function __construct(MemberId $id)
+    /** @var string */
+    private $memberName;
+
+    public function __construct(MemberId $id, string $memberName)
     {
         $this->id = $id;
+        $this->memberName = $memberName;
     }
 
     public function id(): MemberId
     {
         return $this->id;
+    }
+
+    public function name(): string
+    {
+        return $this->memberName;
     }
 }

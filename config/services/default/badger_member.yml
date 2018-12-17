@@ -2,5 +2,7 @@ services:
      ### handler
     Badger\Gamification\Application\SignUpHandler:
         public: true
+        arguments:
+            $memberRepository: '@Badger\Gamification\Domain\Repository\MemberRepository'
         tags:
             - { name: command_handler, handles: 'Badger\Gamification\Application\SignUp' }

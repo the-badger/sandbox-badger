@@ -12,7 +12,7 @@ class MemberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new MemberId(Uuid::uuid4()));
+        $this->beConstructedWith(new MemberId(Uuid::uuid5(Uuid::NAMESPACE_DNS, 'a_name')), 'a_name');
     }
 
     function it_is_initializable()

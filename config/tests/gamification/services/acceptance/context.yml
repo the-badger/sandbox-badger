@@ -1,5 +1,5 @@
 services:
-    Badger\Gamification\Test\Acceptance\Context\SomeoneSignUp:
+    Badger\Gamification\Test\Acceptance\Context\ClaimABadge:
         arguments:
             $bus: '@__symfony__.command_bus'
         tags:

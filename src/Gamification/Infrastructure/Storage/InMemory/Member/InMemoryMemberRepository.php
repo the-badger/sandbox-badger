@@ -24,7 +24,7 @@ final class InMemoryMemberRepository implements MemberRepository
 
     public function save(Member $member): void
     {
-        $this->members[$member->id()] = $member;
+        $this->members[$member->id()->__toString()] = $member;
     }
 
     public function nextIdentity(): MemberId

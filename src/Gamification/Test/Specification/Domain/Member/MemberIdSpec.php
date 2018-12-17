@@ -10,7 +10,7 @@ class MemberIdSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->beConstructedWith(Uuid::uuid4());
+        $this->beConstructedWith(Uuid::uuid5(Uuid::NAMESPACE_DNS, 'a_name'));
         $this->shouldHaveType(MemberId::class);
     }
 }

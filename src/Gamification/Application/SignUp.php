@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 final class SignUp implements Command
 {
     /** @var string */
-    private $badgerUserName;
+    public $badgerUserName;
 
     public function __construct(string $badgerUserName)
     {
