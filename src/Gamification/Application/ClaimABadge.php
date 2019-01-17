@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Badger\Gamification\Application;
 
 use Badger\SharedSpace\Bus\Command;
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
+use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
 final class ClaimABadge implements Command
@@ -28,17 +30,16 @@ final class ClaimABadge implements Command
     {
         try {
             Assert::notEmpty($memberId);
-        } catch (\InvalidArgumentException $exception) {
-            throw new NotEmptyMemberIdException();
+            $this->memberId = Uuid::fromString($memberId);
+        } catch (\InvalidArgumentException | InvalidUuidStringException $e) {
+            throw new BadMemberIdFormatException($memberId);
         }
 
         try {
             Assert::notEmpty($badgeId);
-        } catch (\InvalidArgumentException $exception) {
-            throw new NotEmptyBadgeIdException();
+            $this->badgeId = Uuid::fromString($badgeId);
+        } catch (\InvalidArgumentException | InvalidUuidStringException $e) {
+            throw new BadBadgeIdFormatException($badgeId);
         }
-
-        $this->memberId = $memberId;
-        $this->badgeId = $badgeId;
     }
 }

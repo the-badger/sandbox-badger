@@ -2,10 +2,9 @@
 
 namespace Specification\Badger\Gamification\Application;
 
-use Badger\Gamification\Application\SignUp;
-use Badger\Gamification\Application\SignUpHandler;
-use Badger\Gamification\Domain\Member\Member;
-use Badger\Gamification\Domain\Member\MemberId;
+use Badger\Gamification\Application\ClaimABadge;
+use Badger\Gamification\Application\ClaimABadgeHandler;
+use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\SharedSpace\Bus\CommandHandler;
 use PhpSpec\ObjectBehavior;
@@ -15,23 +14,21 @@ class ClaimABadgeHandlerSpec extends ObjectBehavior
 {
     public function let(MemberRepository $memberRepository, BadgeRepository $badgeRepository)
     {
-        $this->beConstructedWith($memberRepository);
+        $this->beConstructedWith($memberRepository, $badgeRepository);
     }
 
-    public function it_is_initializable(MemberRepository $memberRepository)
+    public function it_is_initializable()
     {
-        $this->shouldBeAnInstanceOf(SignUpHandler::class);
+        $this->shouldBeAnInstanceOf(ClaimABadgeHandler::class);
         $this->shouldImplement(CommandHandler::class);
     }
 
-    public function it_signs_up_a_member($memberRepository)
+    public function it_claims_a_badge($memberRepository, $badgeRepository)
     {
-        $signUp = new SignUp('michel');
-        $memberId = new MemberId(Uuid::uuid5(Uuid::NAMESPACE_DNS, 'michel'));
-        $memberRepository->nextIdentity()->willReturn($memberId);
-        $member = new Member($memberId, 'michel');
-        $memberRepository->save($member)->shouldBeCalled();
+        $memberId = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'michel');
+        $badgeId = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'my_name_is_michel');
+        $claimABadgeCommand = new ClaimABadge($memberId, $badgeId);
 
-        $this->__invoke($signUp);
+        $this->__invoke($claimABadgeCommand);
     }
 }

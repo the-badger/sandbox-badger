@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application;
 
-final class NotEmptyMemberIdException extends \InvalidArgumentException
+final class BadBadgeIdFormatException extends \InvalidArgumentException
 {
-    public function __construct()
+    public function __construct(string $badgeId)
     {
-        $this->message = 'The member id should not be empty';
+        $this->message = "The badge id should be an UUID, {$badgeId} given.";
     }
 }
