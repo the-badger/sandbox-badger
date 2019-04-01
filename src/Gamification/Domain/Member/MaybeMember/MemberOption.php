@@ -11,11 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Badger\Gamification\Domain\Badge\MaybeBadge;
+
+namespace Badger\Gamification\Domain\Member\MaybeMember;
+
 
 use Phunkie\Types\Option;
 
-class BadgeOption
+class MemberOption
 {
     /** @var Option */
     private $option;

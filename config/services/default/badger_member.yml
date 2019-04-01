@@ -6,3 +6,11 @@ services:
             $memberRepository: '@Badger\Gamification\Domain\Repository\MemberRepository'
         tags:
             - { name: command_handler, handles: 'Badger\Gamification\Application\SignUp' }
+
+    Badger\Gamification\Application\ClaimABadgeHandler:
+        public: true
+        arguments:
+            $badgeRepository: '@Badger\Gamification\Domain\Repository\BadgeRepository'
+            $memberRepository: '@Badger\Gamification\Domain\Repository\MemberRepository'
+        tags:
+            - { name: command_handler, handles: 'Badger\Gamification\Application\ClaimABadge' }

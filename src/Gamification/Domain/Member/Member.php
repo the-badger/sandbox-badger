@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Domain\Member;
 
+use Badger\Gamification\Domain\Badge\BadgeId;
+use Phunkie\Types\ImmSet;
+
 final class Member
 {
     /** @var MemberId */
@@ -21,10 +24,22 @@ final class Member
     /** @var string */
     private $memberName;
 
+    /** @var ImmSet */
+    private $claimedBadges;
+
     public function __construct(MemberId $id, string $memberName)
     {
         $this->id = $id;
         $this->memberName = $memberName;
+        $this->claimedBadges = new ImmSet([]);
+    }
+
+    public function claimABadge(BadgeId $badgeId): Member
+    {
+        $member = clone $this;
+        $member->claimedBadges = $member->claimedBadges->plus($badgeId);
+
+        return $member;
     }
 
     public function id(): MemberId

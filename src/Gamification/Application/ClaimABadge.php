@@ -24,7 +24,7 @@ final class ClaimABadge implements Command
     public $memberId;
 
     /** @var string */
-    private $badgeId;
+    public $badgeId;
 
     public function __construct(string $memberId, string $badgeId)
     {

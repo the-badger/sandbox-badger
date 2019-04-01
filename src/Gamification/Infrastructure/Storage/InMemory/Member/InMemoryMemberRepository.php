@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Infrastructure\Storage\InMemory\Member;
 
+use Badger\Gamification\Domain\Member\MaybeMember\MemberOption;
 use Badger\Gamification\Domain\Member\Member;
 use Badger\Gamification\Domain\Member\MemberId;
 use Badger\Gamification\Domain\Member\MemberRepository;
+use Phunkie\Types\ImmMap;
+use Phunkie\Types\ImmSet;
 use Ramsey\Uuid\Uuid;
 
 final class InMemoryMemberRepository implements MemberRepository
@@ -25,6 +28,20 @@ final class InMemoryMemberRepository implements MemberRepository
     public function save(Member $member): void
     {
         $this->members[$member->id()->__toString()] = $member;
+    }
+
+    public function get(MemberId $memberId): MemberOption
+    {
+        return new MemberOption(\Option($this->members[$memberId->__toString()]));
+    }
+
+    public function findByName(string $name): MemberOption
+    {
+        $result = array_filter($this->members, function (Member $member) use ($name) {
+            return ($member->name() === $name);
+        });
+
+        return new MemberOption(\Option($result[0] ?? null));
     }
 
     public function nextIdentity(): MemberId

@@ -13,9 +13,15 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application;
 
+use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
+use Badger\Gamification\Domain\Badge\UnexistingBadgeException;
+use Badger\Gamification\Domain\Member\Member;
+use Badger\Gamification\Domain\Member\MemberId;
 use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\Gamification\Domain\Member\UnexistingMemberException;
 use Badger\SharedSpace\Bus\CommandHandler;
+use spec\Phunkie\Cats\User;
 
 final class ClaimABadgeHandler implements CommandHandler
 {
@@ -33,6 +39,23 @@ final class ClaimABadgeHandler implements CommandHandler
 
     public function __invoke(ClaimABadge $claimABadge)
     {
-        // TODO: write logic here
+        $memberId = new MemberId($claimABadge->memberId);
+        $member = $this->memberRepository->get(new MemberId($claimABadge->memberId));
+
+        if ($member->option()->isEmpty()) {
+            throw new UnexistingMemberException($memberId);
+        }
+
+        $badgeId = new BadgeId($claimABadge->badgeId);
+        $badge = $this->badgeRepository->get($badgeId);
+
+        if ($badge->option()->isEmpty()) {
+            throw new UnexistingBadgeException($badgeId);
+        }
+
+        /** @var Member $member */
+        $member = $member->option()->get();
+
+        $this->memberRepository->save($member->claimABadge($badgeId));
     }
 }

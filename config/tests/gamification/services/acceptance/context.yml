@@ -2,5 +2,6 @@ services:
     Badger\Gamification\Test\Acceptance\Context\ClaimABadge:
         arguments:
             $bus: '@__symfony__.command_bus'
+            $memberRepository: '@__symfony__.Badger\Gamification\Domain\Repository\BadgeRepository'
         tags:
             - { name: fob.context_service }
