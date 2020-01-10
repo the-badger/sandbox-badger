@@ -7,7 +7,6 @@ namespace Badger\Gamification\Test\Acceptance\Context;
 use Badger\Gamification\Application\SignUp;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use SimpleBus\SymfonyBridge\Bus\CommandBus;
 
 final class ClaimABadge implements Context
@@ -35,6 +34,17 @@ final class ClaimABadge implements Context
         $signUpCommand = new SignUp($badgeMember);
         $this->bus->handle($signUpCommand);
         $this->memberUserName = $badgeMember;
+    }
+
+    /**
+     * @Given a badge named :arg1
+     */
+    public function aBadgeNamed($arg1)
+    {
+        $memberOption = $this->memberRepository->findByName($this->memberUserName);
+
+        return false;
+//        $claimABadge = new Badger\Gamification\Application\Command\ClaimABadge($use);
     }
 
     /**

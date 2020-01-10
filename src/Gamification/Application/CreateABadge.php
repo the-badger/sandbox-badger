@@ -11,12 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Badger\Gamification\Domain\Member;
+namespace Badger\Gamification\Application;
 
-class UnexistingMemberException extends \InvalidArgumentException
+use ConvenientImmutability\Immutable;
+
+final class CreateABadge
 {
-    public function __construct(MemberId $id)
-    {
-        $this->message = "The member {$id} does not exist";
-    }
+    use Immutable;
+
+    public $badgeId;
+    public $title;
+    public $description;
 }

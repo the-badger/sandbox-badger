@@ -10,9 +10,6 @@ final class GamificationContainerExtension implements BoundedContextExtension
 {
     private const BOUNDED_CONTEXT_NAME = 'gamification';
 
-    /**
-     * @return string
-     */
     public function boundedContextName(): string
     {
         return self::BOUNDED_CONTEXT_NAME;

@@ -21,7 +21,6 @@ use Badger\Gamification\Domain\Member\MemberId;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\Gamification\Domain\Member\UnexistingMemberException;
 use Badger\SharedSpace\Bus\CommandHandler;
-use spec\Phunkie\Cats\User;
 
 final class ClaimABadgeHandler implements CommandHandler
 {
