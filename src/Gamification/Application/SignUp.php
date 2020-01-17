@@ -19,6 +19,9 @@ use Webmozart\Assert\Assert;
 final class SignUp implements Command
 {
     /** @var string */
+    public $identifier;
+
+    /** @var string */
     public $badgerUserName;
 
     public function __construct(string $badgerUserName)
@@ -30,5 +33,10 @@ final class SignUp implements Command
         }
 
         $this->badgerUserName = $badgerUserName;
+    }
+
+    public function identifierName(): string
+    {
+        return 'identifier';
     }
 }

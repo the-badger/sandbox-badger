@@ -13,13 +13,19 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application;
 
+use Badger\SharedSpace\Bus\Command;
 use ConvenientImmutability\Immutable;
 
-final class CreateABadge
+final class CreateABadge implements Command
 {
     use Immutable;
 
     public $badgeId;
     public $title;
     public $description;
+
+    public function identifierName(): string
+    {
+        return 'badgeId';
+    }
 }

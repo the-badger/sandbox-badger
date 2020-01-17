@@ -21,6 +21,9 @@ use Webmozart\Assert\Assert;
 final class ClaimABadge implements Command
 {
     /** @var string */
+    public $identifier;
+
+    /** @var string */
     public $memberId;
 
     /** @var string */
@@ -41,5 +44,10 @@ final class ClaimABadge implements Command
         } catch (\InvalidArgumentException | InvalidUuidStringException $e) {
             throw new BadBadgeIdFormatException($badgeId);
         }
+    }
+
+    public function identifierName(): string
+    {
+        return 'identifier';
     }
 }

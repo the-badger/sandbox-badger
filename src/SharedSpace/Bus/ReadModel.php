@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus;
 
-interface Command {
-    public function identifierName(): string;
+final class ReadModel
+{
+
 }

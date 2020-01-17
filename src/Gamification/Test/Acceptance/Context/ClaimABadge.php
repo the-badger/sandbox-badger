@@ -6,8 +6,8 @@ namespace Badger\Gamification\Test\Acceptance\Context;
 
 use Badger\Gamification\Application\SignUp;
 use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\SharedSpace\Bus\CommandBus;
 use Behat\Behat\Context\Context;
-use SimpleBus\SymfonyBridge\Bus\CommandBus;
 
 final class ClaimABadge implements Context
 {
@@ -32,16 +32,15 @@ final class ClaimABadge implements Context
     public function aBadgeMember(string $badgeMember): void
     {
         $signUpCommand = new SignUp($badgeMember);
-        $this->bus->handle($signUpCommand);
+        $this->bus->dispatch($signUpCommand);
         $this->memberUserName = $badgeMember;
     }
 
     /**
-     * @Given a badge named :arg1
+     * @Given a badge named :badgeName
      */
-    public function aBadgeNamed($arg1)
+    public function aBadgeNamed(string $badgeName)
     {
-        $memberOption = $this->memberRepository->findByName($this->memberUserName);
 
         return false;
 //        $claimABadge = new Badger\Gamification\Application\Command\ClaimABadge($use);
