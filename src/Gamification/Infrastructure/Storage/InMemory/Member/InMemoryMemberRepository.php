@@ -39,7 +39,15 @@ final class InMemoryMemberRepository implements MemberRepository
             return $member->name() === $name;
         });
 
-        return new MemberOption(\Option($result[0] ?? null));
+        if (0 === count($result)) {
+            return new MemberOption(\Option(null));
+        }
+
+        $resultKey = array_key_first($result);
+
+        $member = $this->members[$resultKey];
+
+        return new MemberOption(\Option($member));
     }
 
     public function nextIdentity(): MemberId

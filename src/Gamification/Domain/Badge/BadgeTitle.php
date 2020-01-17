@@ -28,4 +28,9 @@ final class BadgeTitle
             throw new EmptyBadgeTitleException();
         }
     }
+
+    public function equals(BadgeTitle $badgeTitle): bool
+    {
+        return $this->title === $badgeTitle->title;
+    }
 }

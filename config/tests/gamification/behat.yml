@@ -9,6 +9,8 @@ gamification_acceptance:
       paths:
         - '%paths.base%/../../../features/gamification'
       contexts:
-        - 'Badger\Gamification\Test\Acceptance\Context\ClaimABadge'
+        - 'Badger\Gamification\Test\Acceptance\Context\AuthentificationContext'
+        - 'Badger\Gamification\Test\Acceptance\Context\ClaimABadgeContext'
+        - 'Badger\Gamification\Test\Acceptance\Context\CreateABadgeContext'
       filters:
         tags: '@acceptance&&~@skip'

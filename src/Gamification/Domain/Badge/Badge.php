@@ -16,15 +16,23 @@ namespace Badger\Gamification\Domain\Badge;
 final class Badge
 {
     /** @var BadgeId */
-    private $badgeId;
+    private $id;
+    /** @var BadgeTitle */
+    private $title;
 
-    public function __construct(BadgeId $badgeId)
+    public function __construct(BadgeId $id, BadgeTitle $title)
     {
-        $this->badgeId = $badgeId;
+        $this->id = $id;
+        $this->title = $title;
     }
 
     public function id(): BadgeId
     {
-        return $this->badgeId;
+        return $this->id;
+    }
+
+    public function title(): BadgeTitle
+    {
+        return $this->title;
     }
 }

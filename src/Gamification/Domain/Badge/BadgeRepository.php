@@ -20,4 +20,8 @@ interface BadgeRepository
     public function save(Badge $badge): void;
 
     public function get(BadgeId $badgeId): BadgeOption;
+
+    public function getBadgeByTitle(BadgeTitle $badgeTitle): BadgeOption;
+
+    public function count(): int;
 }

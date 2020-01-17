@@ -33,7 +33,7 @@ final class IdentifierMiddleware implements MiddlewareInterface
         if ($lastIdentifierGeneratedStampHasNotBeenGenerated) {
             if (null === $command->$identifier) {
                 $uuid = Uuid::uuid4();
-                $command->identifier = $uuid->toString();
+                $command->$identifier = $uuid->toString();
                 $envelope = $envelope->with(new IdentifierGeneratedStamp($uuid));
             } else {
                 Assert::string($command->$identifier);

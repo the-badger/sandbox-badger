@@ -46,7 +46,7 @@ update: ## Composer update
 ##################################################### Gamification #####################################################
 .PHONY: run-gamification-cs
 run-gamification-cs: ## Run Gamification Coding Style fixer
-	docker-compose exec fpm vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff --dry-run
+	docker-compose exec fpm vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff
 
 .PHONY: run-gamification-phpspec
 run-gamification-phpspec: ## Run Gamification PHPSpec

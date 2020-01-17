@@ -16,6 +16,7 @@ namespace Badger\Gamification\Application;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
+use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Ramsey\Uuid\Uuid;
 
 final class CreateABadgeHandler
@@ -33,6 +34,7 @@ final class CreateABadgeHandler
     public function __invoke(CreateABadge $createABadge)
     {
         $badgeId = new BadgeId(Uuid::fromString($createABadge->badgeId));
-        $this->badgeRepository->save(new Badge($badgeId));
+        $badgeTitle = new BadgeTitle($createABadge->title);
+        $this->badgeRepository->save(new Badge($badgeId, $badgeTitle));
     }
 }

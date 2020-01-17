@@ -16,6 +16,7 @@ namespace Badger\Gamification\Infrastructure\Storage\InMemory\Badge;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
+use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
 
 class InMemoryBadgeRepository implements BadgeRepository
@@ -31,5 +32,27 @@ class InMemoryBadgeRepository implements BadgeRepository
     public function get(BadgeId $badgeId): BadgeOption
     {
         return new BadgeOption(\Option($this->badges[$badgeId->__toString()]));
+    }
+
+    public function count(): int
+    {
+        return count($this->badges);
+    }
+
+    public function getBadgeByTitle(BadgeTitle $badgeTitle): BadgeOption
+    {
+        $badges = array_filter($this->badges, function (Badge $badge) use ($badgeTitle): bool {
+            return $badge->title()->equals($badgeTitle);
+        });
+
+        if (0 === count($badges)) {
+            return new BadgeOption(\Option(null));
+        }
+
+        $badgeKey = array_key_first($badges);
+
+        $badge = $this->badges[$badgeKey];
+
+        return new BadgeOption(\Option($badge));
     }
 }

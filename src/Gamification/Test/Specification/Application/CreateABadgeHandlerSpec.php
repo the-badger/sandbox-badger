@@ -7,6 +7,7 @@ use Badger\Gamification\Application\CreateABadgeHandler;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
+use Badger\Gamification\Domain\Badge\BadgeTitle;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
@@ -30,7 +31,7 @@ class CreateABadgeHandlerSpec extends ObjectBehavior
         $command->title = 'badgeTitle';
         $command->description = 'an awesome badge';
 
-        $badge = new Badge(new BadgeId(Uuid::fromString($command->badgeId)));
+        $badge = new Badge(new BadgeId(Uuid::fromString($command->badgeId)), new BadgeTitle($command->title));
 
         $badgeRepository->save($badge)->shouldBeCalled();
 
