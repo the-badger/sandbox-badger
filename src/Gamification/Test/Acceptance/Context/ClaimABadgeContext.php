@@ -56,11 +56,15 @@ final class ClaimABadgeContext implements Context
 
         /** @var Member $member */
         $member = $memberOption->option()->get();
+        $badgeOption = $this->badgeRepository->getBadgeByTitle(new BadgeTitle($badgeTitle));
 
-        $claimABadge = new ClaimABadge(
-            $member->id()->__toString(),
-            $this->badgeRepository->getBadgeByTitle(new BadgeTitle($badgeTitle))->option()->get()->id()->__toString()
-        );
+        if ($badgeOption()->isEmpty()) {
+            throw new \LogicException('The badge does not exist');
+        }
+
+        $badgeId = $badgeOption()->get()->id()->__toString();
+
+        $claimABadge = new ClaimABadge($member->id()->__toString(), $badgeId);
 
         $this->commandBus->dispatch($claimABadge);
     }

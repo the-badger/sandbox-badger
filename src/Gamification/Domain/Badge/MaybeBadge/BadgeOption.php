@@ -29,4 +29,9 @@ class BadgeOption
     {
         return $this->option;
     }
+
+    public function __invoke(): Option
+    {
+        return $this->option;
+    }
 }

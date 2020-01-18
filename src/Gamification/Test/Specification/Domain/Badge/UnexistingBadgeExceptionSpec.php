@@ -7,7 +7,7 @@ use Badger\Gamification\Domain\Badge\UnexistingBadgeException;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
 
-class UnexistingMemberExceptionSpec extends ObjectBehavior
+class UnexistingBadgeExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
