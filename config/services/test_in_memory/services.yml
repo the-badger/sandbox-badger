@@ -1,0 +1,6 @@
+services:
+  Badger\Gamification\Domain\Repository\MemberRepository:
+    class: Badger\Gamification\Infrastructure\Storage\InMemory\Member\InMemoryMemberRepository
+
+  Badger\Gamification\Domain\Repository\BadgeRepository:
+    class: Badger\Gamification\Infrastructure\Storage\InMemory\Member\InMemoryMemberRepository

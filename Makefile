@@ -35,6 +35,10 @@ down: ## Down the project
 install: ## Composer install
 	docker-compose exec fpm composer install
 
+.PHONY: composer
+composer: ## composer
+	docker-compose exec fpm composer ${F}
+
 .PHONY: update
 update: ## Composer update
 	docker-compose exec fpm composer update
@@ -42,7 +46,7 @@ update: ## Composer update
 ##################################################### Gamification #####################################################
 .PHONY: run-gamification-cs
 run-gamification-cs: ## Run Gamification Coding Style fixer
-	docker-compose exec fpm vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff --dry-run
+	docker-compose exec fpm vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff
 
 .PHONY: run-gamification-phpspec
 run-gamification-phpspec: ## Run Gamification PHPSpec
@@ -55,3 +59,6 @@ run-gamification-phpspec-desc: ## Run Gamification PHPSpec describe
 .PHONY: run-gamification-acceptance
 run-gamification-acceptance: ## Run Gamification acceptance tests
 	docker-compose exec fpm vendor/bin/behat -p gamification_acceptance -f progress -c config/tests/gamification/behat.yml
+
+.PHONY: gamification
+gamification: run-gamification-cs run-gamification-phpspec run-gamification-acceptance

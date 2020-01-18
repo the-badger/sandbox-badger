@@ -1,4 +1,0 @@
-services:
-    Badger\Gamification\Test\Acceptance\Context\SomeoneSignUp:
-        tags:
-            - { name: fob.context_service }

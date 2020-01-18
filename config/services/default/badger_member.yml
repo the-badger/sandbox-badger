@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+     ### handler
+    Badger\Gamification\Application\SignUpHandler:
+        tags:
+            - { name: command_handler, handles: 'Badger\Gamification\Application\SignUp' }
+
+    Badger\Gamification\Application\ClaimABadgeHandler:
+        tags:
+            - { name: command_handler, handles: 'Badger\Gamification\Application\ClaimABadge' }
+
+    Badger\Gamification\Domain\Member\MemberRepository:
+        class: 'Badger\Gamification\Infrastructure\Storage\InMemory\Member\InMemoryMemberRepository'
+
+    Badger\Gamification\Domain\Badge\BadgeRepository:
+        class: 'Badger\Gamification\Infrastructure\Storage\InMemory\Badge\InMemoryBadgeRepository'
