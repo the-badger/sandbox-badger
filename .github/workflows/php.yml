@@ -1,0 +1,17 @@
+name: PHP Composer
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: create php image
+      run: make php-image-dev
+    - name: create the application
+      run: make app-dev
+    - name: run tests on gamification
+      run: make gamification
