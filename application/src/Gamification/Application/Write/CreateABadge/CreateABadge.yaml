@@ -1,0 +1,7 @@
+Badger\Gamification\Application\Write\CreateABadge:
+  badgeId:
+    - Uuid: ~
+  title:
+    - NotBlank: ~
+  description:
+    - NotBlank: ~
