@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := help
 
 CURRENT_DIR := $(shell pwd)
-check_var = $(if $(strip $(shell echo "$2")),,$(error "$1" is not defined))
+DOCKER_COMPOSE=docker-compose
+PHP_RUN=$(DOCKER_COMPOSE) run --rm -u www-data php php
 
 .PHONY: help
 help:
@@ -10,55 +11,77 @@ help:
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-
-################################################### Static analytics ###################################################
-.PHONY: stan
-stan: ## Run PHPStan
-	docker-compose exec fpm vendor/bin/phpstan analyse src -c config/tests/phpstan.neon -l 7
-
-
 ####################################################### Docker     #####################################################
 
 .PHONY: start
 start: ## Start the project
-	docker-compose up -d
+	$(DOCKER_COMPOSE) up -d --remove-orphan ${C}
 
 .PHONY: stop
 stop: ## Stop the projet
-	docker-compose stop
+	$(DOCKER_COMPOSE) stop
 
 .PHONY: down
 down: ## Down the project
-	docker-compose down -v
+	$(DOCKER_COMPOSE) down -v
 
-.PHONY: install
-install: ## Composer install
-	docker-compose exec fpm composer install
+.PHONY: php-image-dev
+php-image-dev: ## Build the dev docker image
+	DOCKER_BUILDKIT=1 docker build --progress=plain --pull --tag badger/dev/php:7.4 --target dev ./infrastructure
 
-.PHONY: composer
-composer: ## composer
-	docker-compose exec fpm composer ${F}
+.PHONY: php-image-prod
+php-image-prod: ## Build the prod docker image
+	DOCKER_BUILDKIT=1 docker build --progress=plain --pull --tag badger/prod:${IMAGE_TAG} --target prod ./infrastructure
 
-.PHONY: update
-update: ## Composer update
-	docker-compose exec fpm composer update
+.PHONY: php-images ## Build all docker image
+php-images: php-image-dev php-image-prod
+
+################################################# Install ##############################################################
+application/composer.lock: application/composer.json
+	$(PHP_RUN) /usr/local/bin/composer update
+
+application/vendor: application/composer.lock
+	$(PHP_RUN) /usr/local/bin/composer install
+
+.PHONY: cache
+cache: application/vendor ## Remove the cache
+	rm -rf var/cache && $(PHP_RUN) bin/console cache:warmup
+
+.PHONY: sf
+sf: ## Call the symfony console
+	$(PHP_RUN) bin/console ${F}
+
+.PHONY: app-dev
+app-dev: application/vendor
+	APP_ENV=dev $(MAKE) start
+	APP_ENV=dev $(MAKE) cache
 
 ##################################################### Gamification #####################################################
-.PHONY: run-gamification-cs
-run-gamification-cs: ## Run Gamification Coding Style fixer
-	docker-compose exec fpm vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff
+.PHONY: gamification-phpstan
+gamification-phpstan:
+	$(PHP_RUN) vendor/bin/phpstan analyse src/Gamification --level=7 -c config/tests/gamification/phpstan.neon
 
-.PHONY: run-gamification-phpspec
-run-gamification-phpspec: ## Run Gamification PHPSpec
-	docker-compose exec fpm vendor/bin/phpspec run --config config/tests/gamification/phpspec.yml
+.PHONY: gamification-cs
+gamification-cs: ## Run Gamification Coding Style fixer
+	$(PHP_RUN) vendor/bin/php-cs-fixer fix --config=config/tests/gamification/.php_cs --diff
 
-.PHONY: run-gamification-phpspec-desc
-run-gamification-phpspec-desc: ## Run Gamification PHPSpec describe
-	docker-compose exec fpm vendor/bin/phpspec describe --config config/tests/gamification/phpspec.yml
+.PHONY: gamification-back-static
+gamification-back-static: gamification-phpstan gamification-cs
 
-.PHONY: run-gamification-acceptance
-run-gamification-acceptance: ## Run Gamification acceptance tests
-	docker-compose exec fpm vendor/bin/behat -p gamification_acceptance -f progress -c config/tests/gamification/behat.yml
+.PHONY: gamification-phpspec
+gamification-phpspec: ## Run Gamification PHPSpec
+	$(PHP_RUN) vendor/bin/phpspec run --config config/tests/gamification/phpspec.yml
 
-.PHONY: gamification
-gamification: run-gamification-cs run-gamification-phpspec run-gamification-acceptance
+.PHONY: gamification-phpspec-desc
+gamification-phpspec-desc: ## Run Gamification PHPSpec describe
+	$(PHP_RUN) vendor/bin/phpspec describe --config config/tests/gamification/phpspec.yml
+
+.PHONY: gamification-acceptance
+gamification-acceptance: ## Run Gamification acceptance tests
+	$(PHP_RUN) vendor/bin/behat -p gamification_acceptance -f progress -c config/tests/gamification/behat.yml
+
+.PHONY: gamification-back
+gamification-back: gamification-back-static gamification-phpspec gamification-acceptance
+
+.PHONY: gamification ## Run all the gamification tests
+gamification: gamification-back

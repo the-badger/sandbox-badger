@@ -1,52 +1,46 @@
 # Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+/application/app/cache/*
+/application/app/logs/*
+!application/app/cache/.gitkeep
+!application/app/logs/.gitkeep
 
 # Email spool folder
-/app/spool/*
+/application/app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
-/var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
-/var/php_cs.cache
+/application/var/cache/*
+/application/var/logs/*
+/application/var/sessions/*
+!application/var/cache/.gitkeep
+!application/var/logs/.gitkeep
+!application/var/sessions/.gitkeep
+/application/var/php_cs.cache
 
 # Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+/application/app/config/parameters.yml
+/application/app/config/parameters.ini
 
 # Managed by Composer
-/app/bootstrap.php.cache
-/var/bootstrap.php.cache
-/bin/*
-!bin/console
-!bin/symfony_requirements
-/vendor/
+/application/app/bootstrap.php.cache
+/application/var/bootstrap.php.cache
+/application/bin/*
+!application/bin/console
+!application/bin/symfony_requirements
+/application/vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+/application/web/bundles/
+/application/web/uploads/
 
 # PHPUnit
-/app/phpunit.xml
-/phpunit.xml
+/application/app/phpunit.xml
+/application/phpunit.xml
 
 # Build data
-/build/
+/application/build/
 
 # Composer PHAR
 /composer.phar
-
-# Docker
-docker-compose.override.yml
-
-# Env
-.env
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
@@ -55,6 +49,6 @@ docker-compose.override.yml
 /.web-server-pid
 
 ###> friendsofphp/php-cs-fixer ###
-/.php_cs
-/.php_cs.cache
+/application/.php_cs
+/application/.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###

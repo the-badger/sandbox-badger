@@ -1,0 +1,11 @@
+Badger\Gamification\Application\Write\SignUp\SignUp:
+  properties:
+    identifier:
+      - Uuid: ~
+    badgerUserName:
+      - NotBlank: ~
+      - Length:
+          min: 2
+          max: 255
+          minMessage: 'A member name must be at least {{ limit }} characters long'
+          maxMessage: 'A member name must be at max {{ limit }} characters long'
