@@ -3,6 +3,8 @@
 CURRENT_DIR := $(shell pwd)
 DOCKER_COMPOSE=docker-compose
 PHP_RUN=$(DOCKER_COMPOSE) run --rm -u www-data php php
+CURRENT_USER_ID=$(shell id -u)
+CURRENT_GROUP_ID=$(shell id -g)
 
 .PHONY: help
 help:
@@ -27,7 +29,7 @@ down: ## Down the project
 
 .PHONY: php-image-dev
 php-image-dev: ## Build the dev docker image
-	DOCKER_BUILDKIT=1 docker build --progress=plain --pull --tag badger/dev/php:7.4 --target dev ./infrastructure
+	DOCKER_BUILDKIT=1 docker build --build-arg USER_ID=$(CURRENT_USER_ID) --build-arg USER_GROUP=$(CURRENT_GROUP_ID) --progress=plain --pull --tag badger/dev/php:7.4 --target dev ./infrastructure
 
 .PHONY: php-image-prod
 php-image-prod: ## Build the prod docker image

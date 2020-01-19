@@ -1,0 +1,28 @@
+name: Test suite Badger
+
+on: [push]
+
+jobs:
+  build:
+    env:
+      HOST_COMPOSER_HOME: /home/runner/work/sandbox-badger/.composer
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: create php image
+      run: make php-image-dev
+
+    - name: create the directory for composer
+      run: |
+        id
+        mkdir -p /home/runner/work/sandbox-badger/.composer
+        sudo chown -R 1001:1001 /home/runner/work/sandbox-badger/.composer
+
+
+    - name: create the application
+      run: make app-dev
+
+    - name: run tests on gamification
+      run: make gamification

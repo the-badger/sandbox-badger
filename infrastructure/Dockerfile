@@ -4,6 +4,9 @@
 #
 FROM debian:buster-slim AS base
 
+ARG USER_ID=1000
+ARG USER_GROUP=1000
+
 ENV PHP_CONF_DATE_TIMEZONE=UTC \
     PHP_CONF_MAX_EXECUTION_TIME=60 \
     PHP_CONF_MEMORY_LIMIT=512M \
@@ -35,7 +38,7 @@ RUN echo 'APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;' > /etc/apt/
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/sbin/php-fpm7.4 /usr/local/sbin/php-fpm && \
-    usermod --uid 1000 www-data && groupmod --gid 1000 www-data && \
+    usermod --uid ${USER_ID} www-data && groupmod --gid ${USER_GROUP} www-data && \
     mkdir /srv/badger && \
     sed -i "s#listen = /run/php/php7.4-fpm.sock#listen = 9000#g" /etc/php/7.4/fpm/pool.d/www.conf && \
     mkdir -p /run/php
