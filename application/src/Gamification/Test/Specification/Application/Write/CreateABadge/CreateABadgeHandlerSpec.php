@@ -5,6 +5,7 @@ namespace Specification\Badger\Gamification\Application\Write\CreateABadge;
 use Badger\Gamification\Application\Write\CreateABadge\CreateABadge;
 use Badger\Gamification\Application\Write\CreateABadge\CreateABadgeHandler;
 use Badger\Gamification\Domain\Badge\Badge;
+use Badger\Gamification\Domain\Badge\BadgeDescription;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
@@ -29,9 +30,9 @@ class CreateABadgeHandlerSpec extends ObjectBehavior
         $command = new CreateABadge();
         $command->badgeId = Uuid::uuid4()->toString();
         $command->title = 'badgeTitle';
-        $command->description = 'an awesome badge';
+        $command->description = 'An awesome badge!';
 
-        $badge = new Badge(new BadgeId(Uuid::fromString($command->badgeId)), BadgeTitle::fromString($command->title));
+        $badge = new Badge(new BadgeId(Uuid::fromString($command->badgeId)), BadgeTitle::fromString($command->title), BadgeDescription::fromString($command->description));
 
         $badgeRepository->save($badge)->shouldBeCalled();
 

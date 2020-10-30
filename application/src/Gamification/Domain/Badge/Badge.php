@@ -17,11 +17,13 @@ final class Badge
 {
     private BadgeId $id;
     private BadgeTitle $title;
+    private BadgeDescription $description;
 
-    public function __construct(BadgeId $id, BadgeTitle $title)
+    public function __construct(BadgeId $id, BadgeTitle $title, BadgeDescription $description)
     {
         $this->id = $id;
         $this->title = $title;
+        $this->description = $description;
     }
 
     public function id(): BadgeId
@@ -32,5 +34,10 @@ final class Badge
     public function title(): BadgeTitle
     {
         return $this->title;
+    }
+
+    public function description(): BadgeDescription
+    {
+        return $this->description;
     }
 }

@@ -5,6 +5,7 @@ namespace Specification\Badger\Gamification\Application\Write\ClaimABadge;
 use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge;
 use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadgeHandler;
 use Badger\Gamification\Domain\Badge\Badge;
+use Badger\Gamification\Domain\Badge\BadgeDescription;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
@@ -42,13 +43,14 @@ class ClaimABadgeHandlerSpec extends ObjectBehavior
         $memberId = new MemberId($memberId);
         $badgeId = new BadgeId($badgeId);
         $badgeTitle = BadgeTitle::fromString('Michel Sardou');
+        $badgeDescription = BadgeDescription::fromString('You unlocked the very rare Michel Sardou badge!');
         $memberName = MemberName::fromString('michel');
 
         $badgerMember = new Member($memberId, $memberName);
         $memberOption = MemberOption::some($badgerMember);
         $memberRepository->get($memberId)->willReturn($memberOption);
 
-        $badge = new Badge($badgeId, $badgeTitle);
+        $badge = new Badge($badgeId, $badgeTitle, $badgeDescription);
         $badgeOption = BadgeOption::some($badge);
         $badgeRepository->get($badgeId)->willReturn($badgeOption);
 

@@ -13,12 +13,15 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",
         "symfony/messenger": "4.4.*",
+        "symfony/routing": "4.4.*",
+        "symfony/monolog-bundle": "^3.5",
         "symfony/validator": "4.4.*",
         "symfony/yaml": "*",
         "webmozart/assert": "^1.3"
     },
     "require-dev": {
         "symfony/dotenv": "*",
+        "thecodingmachine/safe": "^0.1.16",
         "behat/behat": "^3.5",
         "friends-of-behat/symfony-extension": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.16",

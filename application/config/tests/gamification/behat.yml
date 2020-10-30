@@ -9,8 +9,25 @@ gamification_acceptance:
       paths:
         - '%paths.base%/../../../../features/gamification'
       contexts:
-        - 'Badger\Gamification\Test\Acceptance\Context\AuthentificationContext'
+        - 'Badger\Gamification\Test\Acceptance\Context\AuthenticationContext'
         - 'Badger\Gamification\Test\Acceptance\Context\ClaimABadgeContext'
         - 'Badger\Gamification\Test\Acceptance\Context\CreateABadgeContext'
       filters:
         tags: '@acceptance&&~@skip'
+
+gamification_end_to_end_api:
+  suites:
+    default:
+      paths:
+        - '%paths.base%/../../../../features/gamification'
+      contexts:
+        - 'Badger\Gamification\Test\EndToEnd\Api\Context\AuthenticationContext'
+        - 'Badger\Gamification\Test\EndToEnd\Api\Context\CreateABadgeContext'
+      filters:
+        tags: '@end-to-end-api&&~@skip'
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        class: 'Badger\SharedSpace\Symfony\Kernel'
+        environment: 'test_in_memory'

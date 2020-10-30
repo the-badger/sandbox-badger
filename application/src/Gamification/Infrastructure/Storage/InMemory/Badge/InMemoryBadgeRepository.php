@@ -22,7 +22,7 @@ use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
 class InMemoryBadgeRepository implements BadgeRepository
 {
     /** @var Badge[] */
-    private $badges = [];
+    private array $badges = [];
 
     public function save(Badge $badge): void
     {
