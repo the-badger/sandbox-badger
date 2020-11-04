@@ -1,6 +1,6 @@
 Feature: Create a badge
 
-  @acceptance
+  @acceptance @end-to-end-api
   Scenario: Create a badge
     Given a badger "admin" "Michel"
     When I create a badge "My name is Michel" "Superb badge"

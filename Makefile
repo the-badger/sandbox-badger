@@ -82,8 +82,12 @@ gamification-phpspec-desc: ## Run Gamification PHPSpec describe
 gamification-acceptance: ## Run Gamification acceptance tests
 	$(PHP_RUN) vendor/bin/behat -p gamification_acceptance -f progress -c config/tests/gamification/behat.yml
 
+.PHONY: gamification-end-to-end-api
+gamification-end-to-end-api: ## Run Gamification end to end tests
+	$(PHP_RUN) vendor/bin/behat -p gamification_end_to_end_api -f progress -c config/tests/gamification/behat.yml
+
 .PHONY: gamification-back
-gamification-back: gamification-back-static gamification-phpspec gamification-acceptance
+gamification-back: gamification-back-static gamification-phpspec gamification-acceptance gamification-end-to-end-api
 
 .PHONY: gamification ## Run all the gamification tests
 gamification: gamification-back

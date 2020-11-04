@@ -9,7 +9,7 @@ use Badger\Gamification\Domain\Member\MemberName;
 use Badger\SharedSpace\Bus\Command\CommandBus;
 use Behat\Behat\Context\Context;
 
-final class AuthentificationContext implements Context
+final class AuthenticationContext implements Context
 {
     private Store $store;
     private CommandBus $commandBus;

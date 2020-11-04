@@ -18,6 +18,13 @@ services:
     tags:
       - { name: messenger.message_handler, bus: command.bus }
 
+  controllers:
+    namespace: Badger\Gamification\Infrastructure\UserInterface\Web\
+    resource: '%kernel.project_dir%/src/Gamification/Infrastructure/UserInterface/Web/**/*Controller.php'
+    public: true
+    tags:
+      - { name: controller.service_arguments }
+
 #  query_handlers:
 #    namespace: Gamification\
 #    resource: '%kernel.project_dir%/src/**/Read/**/*Handler.php'
