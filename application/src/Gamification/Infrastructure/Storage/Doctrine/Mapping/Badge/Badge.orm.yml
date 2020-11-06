@@ -1,0 +1,19 @@
+Badger\Gamification\Domain\Badge\Badge:
+    type: entity
+    table: badge
+    fields:
+        id:
+            id: true
+            type: badge_id
+            generator:
+                strategy: NONE
+        title:
+            type: badge_title
+            unique: true
+            length: 255
+            nullable: false
+        description:
+            type: badge_description
+            unique: true
+            length: 255
+            nullable: false

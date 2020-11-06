@@ -58,6 +58,12 @@ app-dev: application/vendor
 	APP_ENV=dev $(MAKE) start
 	APP_ENV=dev $(MAKE) cache
 
+.PHONY: db-schema
+db-schema:
+	$(PHP_RUN) bin/console d:s:u --dump-sql
+	$(PHP_RUN) bin/console d:s:u --force
+
+
 ##################################################### Gamification #####################################################
 .PHONY: gamification-phpstan
 gamification-phpstan:

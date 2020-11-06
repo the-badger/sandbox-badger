@@ -31,3 +31,10 @@ services:
 #    autoconfigure: false
 #    tags:
 #      - { name: messenger.message_handler, bus: query.bus }
+
+
+  Badger\Gamification\Domain\Member\MemberRepository:
+    class: 'Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Member\MemberRepository'
+
+  Badger\Gamification\Domain\Badge\BadgeRepository:
+    class: 'Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Badge\BadgeRepository'

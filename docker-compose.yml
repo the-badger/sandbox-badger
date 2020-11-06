@@ -47,6 +47,13 @@ services:
     networks:
       - 'badger'
 
+  db:
+    image: 'postgres:12.1'
+    ports:
+      - '${DOCKER_PORT_POSTGRES:-5434}:5432'
+    networks:
+      - 'badger'
+
 networks:
   badger:
 
