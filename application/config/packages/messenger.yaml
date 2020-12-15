@@ -16,6 +16,7 @@ framework:
                     - 'Badger\SharedSpace\Bus\Command\IdentifierMiddleware'
                     - validation
                     - dispatch_after_current_bus
+                    - doctrine_transaction
             query.bus:
                 middleware:
                     - validation

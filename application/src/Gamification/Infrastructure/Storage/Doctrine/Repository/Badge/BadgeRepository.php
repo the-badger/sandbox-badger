@@ -32,7 +32,6 @@ final class BadgeRepository implements BadgeRepositoryInterface
     public function save(Badge $bade): void
     {
         $this->entityManager->persist($bade);
-        $this->entityManager->flush();
     }
 
     public function get(BadgeId $id): BadgeOption

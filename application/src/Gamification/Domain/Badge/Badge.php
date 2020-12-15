@@ -15,9 +15,9 @@ namespace Badger\Gamification\Domain\Badge;
 
 class Badge
 {
-    public BadgeId $id;
-    public BadgeTitle $title;
-    public BadgeDescription $description;
+    private BadgeId $id;
+    private BadgeTitle $title;
+    private BadgeDescription $description;
 
     public function __construct(BadgeId $id, BadgeTitle $title, BadgeDescription $description)
     {
