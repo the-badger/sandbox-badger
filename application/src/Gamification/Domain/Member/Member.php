@@ -16,11 +16,11 @@ namespace Badger\Gamification\Domain\Member;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Phunkie\Types\ImmSet;
 
-final class Member
+class Member
 {
-    private MemberId $id;
-    private MemberName $memberName;
-    private ImmSet $claimedBadges;
+    public MemberId $id;
+    public MemberName $memberName;
+    public ImmSet $claimedBadges;
 
     public function __construct(MemberId $id, MemberName $memberName)
     {

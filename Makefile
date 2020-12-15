@@ -31,6 +31,10 @@ down: ## Down the project
 php-image-dev: ## Build the dev docker image
 	DOCKER_BUILDKIT=1 docker build --build-arg USER_ID=$(CURRENT_USER_ID) --build-arg USER_GROUP=$(CURRENT_GROUP_ID) --progress=plain --pull --tag badger/dev/php:7.4 --target dev ./infrastructure
 
+.PHONY: php-image-dev-mac
+php-image-dev-mac:
+	DOCKER_BUILDKIT=1 docker image build --progress=plain --pull --tag badger/dev/php:7.4 --target dev ./infrastructure
+
 .PHONY: php-image-prod
 php-image-prod: ## Build the prod docker image
 	DOCKER_BUILDKIT=1 docker build --progress=plain --pull --tag badger/prod:${IMAGE_TAG} --target prod ./infrastructure
@@ -57,6 +61,12 @@ sf: ## Call the symfony console
 app-dev: application/vendor
 	APP_ENV=dev $(MAKE) start
 	APP_ENV=dev $(MAKE) cache
+
+.PHONY: db-schema
+db-schema:
+	$(PHP_RUN) bin/console d:s:u --dump-sql
+	$(PHP_RUN) bin/console d:s:u --force
+
 
 ##################################################### Gamification #####################################################
 .PHONY: gamification-phpstan

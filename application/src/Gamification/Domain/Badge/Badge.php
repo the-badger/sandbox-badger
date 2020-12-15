@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Domain\Badge;
 
-final class Badge
+class Badge
 {
     private BadgeId $id;
     private BadgeTitle $title;
