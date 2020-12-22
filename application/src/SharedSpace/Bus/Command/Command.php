@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Command;
 
-interface Command {
-    public function identifierName(): string;
-}
+interface Command {}

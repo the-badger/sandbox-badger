@@ -28,13 +28,10 @@ class CreateABadgeHandlerSpec extends ObjectBehavior
     function it_should_create_a_badge(BadgeRepository $badgeRepository)
     {
         $command = new CreateABadge();
-        $command->badgeId = Uuid::uuid4()->toString();
         $command->title = 'badgeTitle';
         $command->description = 'An awesome badge!';
 
-        $badge = new Badge(new BadgeId(Uuid::fromString($command->badgeId)), BadgeTitle::fromString($command->title), BadgeDescription::fromString($command->description));
-
-        $badgeRepository->save($badge)->shouldBeCalled();
+        $badgeRepository->save(Argument::type(Badge::class))->shouldBeCalled();
 
         $this->__invoke($command);
     }

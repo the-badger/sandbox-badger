@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Infrastructure\UserInterface\Web\Write;
 
-use Badger\Gamification\Application\Write\CreateABadge\CreateABadge;
+use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge;
 use Badger\SharedSpace\Bus\Command\CommandBus;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CreateABadgeController
+final class ClaimABadgeController
 {
     private CommandBus $bus;
 
@@ -30,12 +31,13 @@ final class CreateABadgeController
 
     public function __invoke(Request $request): JsonResponse
     {
-        $command = new CreateABadge();
-        $command->title = $request->get('badgeTitle');
-        $command->description = $request->get('badgeDescription');
+        $command = new ClaimABadge();
+        $command->badgeId = Uuid::uuid4()->toString();
+        $command->badgeId = $request->get('badgeId');
+        $command->memberId = $request->get('memberId');
 
-        $uuid = $this->bus->dispatch($command);
+        $this->bus->dispatch($command);
 
-        return new JsonResponse(['badge_identifier' => $uuid], Response::HTTP_ACCEPTED);
+        return new JsonResponse([], Response::HTTP_ACCEPTED);
     }
 }

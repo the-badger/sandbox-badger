@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Badger\Gamification\Application\Write\ClaimABadge;
+namespace Badger\Gamification\Application\Read\ListBadges;
 
-use Badger\SharedSpace\Bus\Command\Command;
+use Badger\SharedSpace\Bus\Query\Query;
 use ConvenientImmutability\Immutable;
 
-final class ClaimABadge implements Command
+final class ListBadges implements Query
 {
     use Immutable;
 

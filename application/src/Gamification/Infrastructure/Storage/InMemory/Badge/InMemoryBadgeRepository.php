@@ -55,4 +55,9 @@ class InMemoryBadgeRepository implements BadgeRepository
 
         return BadgeOption::some($badge);
     }
+
+    public function all(): array
+    {
+        return $this->badges;
+    }
 }

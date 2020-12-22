@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Query;
 
-final class Query
-{
-}
+interface Query {}

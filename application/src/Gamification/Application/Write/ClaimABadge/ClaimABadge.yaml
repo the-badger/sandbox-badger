@@ -1,7 +1,5 @@
 Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge:
   properties:
-    identifier:
-      - Uuid: ~
     badgeId:
       - Uuid: ~
     memberId:

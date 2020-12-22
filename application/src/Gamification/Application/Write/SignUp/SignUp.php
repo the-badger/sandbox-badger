@@ -20,11 +20,5 @@ final class SignUp implements Command
 {
     use Immutable;
 
-    public ?string $identifier = null;
     public ?string $badgerUserName = null;
-
-    public function identifierName(): string
-    {
-        return 'identifier';
-    }
 }

@@ -2,3 +2,13 @@ create_badge:
   path:     /api/badge/create
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\CreateABadgeController,  _format: json }
   methods:  [POST]
+
+claim_a_badge:
+  path:     /api/badge/claim
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\ClaimABadgeController,  _format: json }
+  methods:  [POST]
+
+list_badges:
+  path:     /api/badge/list
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetBadgesListController,  _format: json }
+  methods:  [POST]

@@ -1,6 +1,6 @@
 ## Badger  App
 
-This application aims to show code practices and testing practices.
+Badger is a gamification platform initially developed as an internal project by Akeneo. Badger is still under development, but is working! If you want to try the project, please install the last release.
 
 ## Setup
 

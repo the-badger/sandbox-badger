@@ -13,7 +13,4 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Query;
 
-final class ReadModel
-{
-
-}
+final class ReadModel {}
