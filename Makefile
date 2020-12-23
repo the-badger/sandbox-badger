@@ -101,3 +101,9 @@ gamification-back: gamification-back-static gamification-phpspec gamification-ac
 
 .PHONY: gamification ## Run all the gamification tests
 gamification: gamification-back
+
+.PHONY: db-init
+db-init:
+	$(PHP_RUN) bin/console doctrine:database:drop --force
+	$(PHP_RUN) bin/console doctrine:database:create
+	$(PHP_RUN) bin/console doctrine:schema:update --force

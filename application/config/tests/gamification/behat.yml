@@ -23,6 +23,8 @@ gamification_end_to_end_api:
       contexts:
         - 'Badger\Gamification\Test\EndToEnd\Api\Context\AuthenticationContext'
         - 'Badger\Gamification\Test\EndToEnd\Api\Context\CreateABadgeContext'
+        - 'Badger\Gamification\Test\EndToEnd\Api\Context\ClaimABadgeContext'
+        - 'Badger\Gamification\Test\EndToEnd\Api\Context\DatabaseContext'
       filters:
         tags: '@end-to-end-api&&~@skip'
 
@@ -30,4 +32,4 @@ gamification_end_to_end_api:
     FriendsOfBehat\SymfonyExtension:
       kernel:
         class: 'Badger\SharedSpace\Symfony\Kernel'
-        environment: 'test_in_memory'
+        environment: 'test_in_database'

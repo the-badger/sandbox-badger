@@ -18,6 +18,7 @@ use Badger\SharedSpace\Bus\Command\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final class CreateABadgeController
 {
@@ -34,7 +35,11 @@ final class CreateABadgeController
         $command->title = $request->get('badgeTitle');
         $command->description = $request->get('badgeDescription');
 
-        $uuid = $this->bus->dispatch($command);
+        try {
+            $uuid = $this->bus->dispatch($command);
+        } catch (HandlerFailedException $e) {
+            return new JsonResponse($e->getMessage());
+        }
 
         return new JsonResponse(['badge_identifier' => $uuid], Response::HTTP_ACCEPTED);
     }

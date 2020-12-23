@@ -15,10 +15,10 @@ namespace Badger\Gamification\Infrastructure\UserInterface\Web\Write;
 
 use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge;
 use Badger\SharedSpace\Bus\Command\CommandBus;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final class ClaimABadgeController
 {
@@ -32,11 +32,16 @@ final class ClaimABadgeController
     public function __invoke(Request $request): JsonResponse
     {
         $command = new ClaimABadge();
-        $command->badgeId = Uuid::uuid4()->toString();
         $command->badgeId = $request->get('badgeId');
         $command->memberId = $request->get('memberId');
 
-        $this->bus->dispatch($command);
+        try {
+            $this->bus->dispatch($command);
+        } catch (HandlerFailedException $e) {
+            var_dump($e->getMessage());
+
+            return new JsonResponse($e->getMessage());
+        }
 
         return new JsonResponse([], Response::HTTP_ACCEPTED);
     }

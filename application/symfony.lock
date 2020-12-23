@@ -195,6 +195,9 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "php-ds/php-ds": {
+        "version": "v1.3.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },

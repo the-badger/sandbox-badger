@@ -12,6 +12,7 @@ doctrine:
           badge_description: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeDescriptionType
           member_id: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberIdType
           member_name: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberNameType
+          claimed_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\ClaimedBadgesType
 
     orm:
         auto_generate_proxy_classes: true

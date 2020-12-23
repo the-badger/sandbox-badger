@@ -18,6 +18,7 @@ use Badger\SharedSpace\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 final class GetBadgesListController
 {
@@ -32,7 +33,11 @@ final class GetBadgesListController
     {
         $query = new ListBadges();
 
-        $badges = $this->bus->fetch($query);
+        try {
+            $badges = $this->bus->fetch($query);
+        } catch (HandlerFailedException $e) {
+            return new JsonResponse($e->getMessage());
+        }
 
         return new JsonResponse($badges, Response::HTTP_ACCEPTED);
     }

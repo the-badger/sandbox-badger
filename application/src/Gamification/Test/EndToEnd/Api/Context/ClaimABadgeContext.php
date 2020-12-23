@@ -21,10 +21,12 @@ use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class CreateABadgeContext implements Context
+final class ClaimABadgeContext implements Context
 {
     private ApiTestHelper $apiTestHelper;
     private BadgeRepository $badgeRepository;
+    /** @var array<Badge> */
+    private array $badges = [];
     private Store $store;
 
     public function __construct(
@@ -38,29 +40,16 @@ final class CreateABadgeContext implements Context
     }
 
     /**
-     * @Given a badge :badgeTitle :badgeDescription
-     * @When I create a badge :badgeTitle :description
+     * @Then I should be able to claim the badge :badgeTitle
      *
      * @throws \Safe\Exceptions\JsonException
      */
-    public function iCreateABadge(string $badgeTitle, string $badgeDescription): void
+    public function iShouldBeAbleToClaimTheBadge(string $badgeTitle): void
     {
-        $content = ['badgeTitle' => $badgeTitle, 'badgeDescription' => $badgeDescription];
+        $content = ['badgeId' => $this->store->get($badgeTitle), 'memberId' => '285bc91b-8416-4159-bf7a-b00144298f72'];
 
-        $response = $this->apiTestHelper->jsonPost($content, 'create_badge');
-
-        $identifier = \Safe\json_decode((string) $response->getContent(), true)['badge_identifier'];
-
-        $this->store->set($badgeTitle, $identifier);
+        $response = $this->apiTestHelper->jsonPost($content, 'claim_a_badge');
 
         Assert::eq($response->getStatusCode(), Response::HTTP_ACCEPTED);
-    }
-
-    /**
-     * @Then I should see :amount badge
-     */
-    public function iShouldSeeBadge(int $amount): void
-    {
-        Assert::eq($this->badgeRepository->count(), $amount);
     }
 }
