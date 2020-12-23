@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Badger\Gamification\Application\Read\ListBadges;
 
 use Badger\Gamification\Domain\Badge\Badge;
+use Badger\SharedSpace\Bus\Query\ReadModel;
 
-final class BadgesReadModel
+final class BadgesReadModel implements ReadModel
 {
     /** @var array<Badge> */
     private array $badges = [];

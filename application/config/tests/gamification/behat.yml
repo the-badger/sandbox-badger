@@ -12,6 +12,7 @@ gamification_acceptance:
         - 'Badger\Gamification\Test\Acceptance\Context\AuthenticationContext'
         - 'Badger\Gamification\Test\Acceptance\Context\ClaimABadgeContext'
         - 'Badger\Gamification\Test\Acceptance\Context\CreateABadgeContext'
+        - 'Badger\Gamification\Test\Acceptance\Context\GetABadgeContext'
       filters:
         tags: '@acceptance&&~@skip'
 
@@ -25,6 +26,7 @@ gamification_end_to_end_api:
         - 'Badger\Gamification\Test\EndToEnd\Api\Context\CreateABadgeContext'
         - 'Badger\Gamification\Test\EndToEnd\Api\Context\ClaimABadgeContext'
         - 'Badger\Gamification\Test\EndToEnd\Api\Context\DatabaseContext'
+        - 'Badger\Gamification\Test\EndToEnd\Api\Context\GetABadgeContext'
       filters:
         tags: '@end-to-end-api&&~@skip'
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Domain\Badge;
 
-class UnexistingBadgeException extends \InvalidArgumentException
+class BadgeDoesNotExistException extends \InvalidArgumentException
 {
     public function __construct(BadgeId $id)
     {

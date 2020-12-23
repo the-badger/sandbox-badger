@@ -13,4 +13,4 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Query;
 
-interface ReadModel {}
+interface QueryHandler {}

@@ -11,6 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Badger\SharedSpace\Bus\Query;
+namespace Badger\Gamification\Application\Read\GetABadge;
 
-interface ReadModel {}
+use Badger\SharedSpace\Bus\Query\Query;
+use ConvenientImmutability\Immutable;
+
+final class GetABadge implements Query
+{
+    use Immutable;
+
+    public ?string $badgeId = null;
+}

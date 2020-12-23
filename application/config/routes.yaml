@@ -12,3 +12,8 @@ list_badges:
   path:     /api/badge/list
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetBadgesListController,  _format: json }
   methods:  [POST]
+
+get_a_badge:
+  path:     /api/badge/get/{badgeId}
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetABadgeController,  _format: json }
+  methods:  [GET]

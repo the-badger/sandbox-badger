@@ -1,4 +1,4 @@
-Feature: Claim a badge
+Feature: List badges
 
   @acceptance @end-to-end-api
   Scenario: Claim a badge

@@ -11,13 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Badger\Gamification\Application\Read\ListBadges;
+namespace Badger\Gamification\Application\Read\GetABadge;
 
+use Badger\Gamification\Domain\Badge\BadgeDoesNotExistException;
+use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\SharedSpace\Bus\Query\QueryHandler;
 use Badger\SharedSpace\Bus\Query\ReadModel;
 
-final class ListBadgesHandler implements QueryHandler
+final class GetABadgeHandler implements QueryHandler
 {
     private BadgeRepository $badgeRepository;
 
@@ -26,8 +28,14 @@ final class ListBadgesHandler implements QueryHandler
         $this->badgeRepository = $badgeRepository;
     }
 
-    public function __invoke(ListBadges $listBadges): ReadModel
+    public function __invoke(GetABadge $getABadge): ReadModel
     {
-        return new BadgesReadModel($this->badgeRepository->all());
+        $badge = $this->badgeRepository->get(BadgeId::fromUuidString($getABadge->badgeId));
+
+        if ($badge->isEmpty()) {
+            throw new BadgeDoesNotExistException(BadgeId::fromUuidString($getABadge->badgeId));
+        }
+
+        return new BadgeReadModel($badge->badge());
     }
 }
