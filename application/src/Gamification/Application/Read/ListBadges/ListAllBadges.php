@@ -14,12 +14,7 @@ declare(strict_types=1);
 namespace Badger\Gamification\Application\Read\ListBadges;
 
 use Badger\SharedSpace\Bus\Query\Query;
-use ConvenientImmutability\Immutable;
 
-final class ListBadges implements Query
+final class ListAllBadges implements Query
 {
-    use Immutable;
-
-    public ?string $memberId = null;
-    public ?string $badgeId = null;
 }

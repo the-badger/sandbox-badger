@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Infrastructure\UserInterface\Web\Read;
 
-use Badger\Gamification\Application\Read\ListBadges\ListBadges;
+use Badger\Gamification\Application\Read\ListBadges\ListAllBadges;
 use Badger\SharedSpace\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ final class GetBadgesListController
 
     public function __invoke(Request $request): JsonResponse
     {
-        $query = new ListBadges();
+        $query = new ListAllBadges();
 
         try {
             $badges = $this->bus->fetch($query);

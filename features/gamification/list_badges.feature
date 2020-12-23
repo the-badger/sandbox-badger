@@ -1,8 +1,8 @@
 Feature: List badges
 
   @acceptance @end-to-end-api
-  Scenario: Claim a badge
+  Scenario: List all badges
     Given a badger member Michel
     And a badge "My name is Michel" "A superb badge"
     And a badge "List badges" "I can successfully list all badges"
-    Then I should see 2 badge
+    Then I should be able to list all badges

@@ -17,7 +17,7 @@ use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\SharedSpace\Bus\Query\QueryHandler;
 use Badger\SharedSpace\Bus\Query\ReadModel;
 
-final class ListBadgesHandler implements QueryHandler
+final class ListAllBadgesHandler implements QueryHandler
 {
     private BadgeRepository $badgeRepository;
 
@@ -26,7 +26,7 @@ final class ListBadgesHandler implements QueryHandler
         $this->badgeRepository = $badgeRepository;
     }
 
-    public function __invoke(ListBadges $listBadges): ReadModel
+    public function __invoke(ListAllBadges $listBadges): ReadModel
     {
         return new BadgesReadModel($this->badgeRepository->all());
     }

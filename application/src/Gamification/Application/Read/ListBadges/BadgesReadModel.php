@@ -13,22 +13,19 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application\Read\ListBadges;
 
-use Badger\Gamification\Domain\Badge\Badge;
 use Badger\SharedSpace\Bus\Query\ReadModel;
 
 final class BadgesReadModel implements ReadModel
 {
-    /** @var array<Badge> */
-    private array $badges = [];
+    public array $badges = [];
 
-    /** @var array<Badge> */
     public function __construct(array $badges)
     {
         foreach ($badges as $badge) {
-            $this->$badges[] = [
-                'id' => $badge->id()->toString(),
-                'title' => $badge->title()->toString(),
-                'description' => $badge->description()->toString(),
+            $this->badges[] = [
+                'id' => $badge->id()->__toString(),
+                'title' => $badge->title()->__toString(),
+                'description' => $badge->description()->__toString(),
             ];
         }
     }
