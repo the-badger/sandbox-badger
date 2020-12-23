@@ -24,5 +24,8 @@ jobs:
     - name: create the application
       run: make app-dev
 
+    - name: initialize the database
+      run: make init-db
+
     - name: run tests on gamification
       run: make gamification
