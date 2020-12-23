@@ -19,7 +19,7 @@ final class ClaimedBadgesType extends JsonType
 
     public function convertToPHPValue($value, AbstractPlatform $platform): ImmSet
     {
-        $value = json_decode($value, true);
+        $value = \Safe\json_decode($value, true);
 
         return new ImmSet($value);
     }
