@@ -46,6 +46,6 @@ final class ListBadgesContext implements Context
         $badges = \Safe\json_decode((string) $response->getContent(), true);
 
         Assert::eq($response->getStatusCode(), Response::HTTP_ACCEPTED);
-        Assert::eq(count(array_pop($badges)), 2);
+        Assert::eq(count($badges), 2);
     }
 }

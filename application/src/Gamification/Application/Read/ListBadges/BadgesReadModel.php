@@ -17,7 +17,7 @@ use Badger\SharedSpace\Bus\Query\ReadModel;
 
 final class BadgesReadModel implements ReadModel
 {
-    public array $badges = [];
+    private array $badges = [];
 
     public function __construct(array $badges)
     {
@@ -28,5 +28,10 @@ final class BadgesReadModel implements ReadModel
                 'description' => $badge->description()->__toString(),
             ];
         }
+    }
+
+    public function getValue(): array
+    {
+        return $this->badges;
     }
 }

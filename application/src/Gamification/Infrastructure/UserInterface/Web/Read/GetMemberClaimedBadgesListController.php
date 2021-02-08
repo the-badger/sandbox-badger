@@ -11,36 +11,35 @@
 
 declare(strict_types=1);
 
-namespace Badger\Gamification\Infrastructure\UserInterface\Web\Write;
+namespace Badger\Gamification\Infrastructure\UserInterface\Web\Read;
 
-use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge;
-use Badger\SharedSpace\Bus\Command\CommandBus;
+use Badger\Gamification\Application\Read\ListBadges\ListAllClaimedBadgesForAUser;
+use Badger\SharedSpace\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
-final class ClaimABadgeController
+final class GetMemberClaimedBadgesListController
 {
-    private CommandBus $bus;
+    private QueryBus $bus;
 
-    public function __construct(CommandBus $bus)
+    public function __construct(QueryBus $bus)
     {
         $this->bus = $bus;
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request, string $memberId): JsonResponse
     {
-        $command = new ClaimABadge();
-        $command->badgeId = $request->get('badgeId');
-        $command->memberId = $request->get('memberId');
+        $query = new ListAllClaimedBadgesForAUser();
+        $query->memberId = $memberId;
 
         try {
-            $this->bus->dispatch($command);
+            $claimedBadges = $this->bus->fetch($query);
         } catch (HandlerFailedException $e) {
             return new JsonResponse($e->getMessage());
         }
 
-        return new JsonResponse([], Response::HTTP_ACCEPTED);
+        return new JsonResponse($claimedBadges->getValue(), Response::HTTP_ACCEPTED);
     }
 }

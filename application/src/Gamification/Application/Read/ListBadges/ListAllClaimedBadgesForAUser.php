@@ -17,5 +17,5 @@ use Badger\SharedSpace\Bus\Query\Query;
 
 final class ListAllClaimedBadgesForAUser implements Query
 {
-    public string $badgeId;
+    public string $memberId;
 }

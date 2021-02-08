@@ -13,6 +13,11 @@ list_all_badges:
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetBadgesListController,  _format: json }
   methods:  [GET]
 
+list_all_claimed_badges_for_a_user:
+  path:     /api/badge/claimed/list/{memberId}
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetMemberClaimedBadgesListController,  _format: json }
+  methods:  [GET]
+
 get_a_badge:
   path:     /api/badge/get/{badgeId}
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetABadgeController,  _format: json }

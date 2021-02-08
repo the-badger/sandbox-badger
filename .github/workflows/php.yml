@@ -20,7 +20,6 @@ jobs:
         mkdir -p /home/runner/work/sandbox-badger/.composer
         sudo chown -R 1001:1001 /home/runner/work/sandbox-badger/.composer
 
-
     - name: create the application
       run: make app-dev
 

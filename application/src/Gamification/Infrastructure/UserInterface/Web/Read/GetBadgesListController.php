@@ -39,6 +39,6 @@ final class GetBadgesListController
             return new JsonResponse($e->getMessage());
         }
 
-        return new JsonResponse($badges, Response::HTTP_ACCEPTED);
+        return new JsonResponse($badges->getValue(), Response::HTTP_ACCEPTED);
     }
 }

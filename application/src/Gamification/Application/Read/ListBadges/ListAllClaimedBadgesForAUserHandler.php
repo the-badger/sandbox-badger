@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application\Read\ListBadges;
 
-use Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Member\MemberRepository;
+use Badger\Gamification\Domain\Member\MemberId;
+use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\Gamification\Domain\Member\UnexistingMemberException;
 use Badger\SharedSpace\Bus\Query\QueryHandler;
 use Badger\SharedSpace\Bus\Query\ReadModel;
 
@@ -28,6 +30,14 @@ final class ListAllClaimedBadgesForAUserHandler implements QueryHandler
 
     public function __invoke(ListAllClaimedBadgesForAUser $listAllClaimedBadgesForAUser): ReadModel
     {
-        return new BadgesReadModel($this->memberRepository->all());
+        $memberOption = $this->memberRepository->get(MemberId::fromUuidString($listAllClaimedBadgesForAUser->memberId));
+
+        if ($memberOption->isEmpty()) {
+            throw new UnexistingMemberException(MemberId::fromUuidString($listAllClaimedBadgesForAUser->memberId));
+        }
+
+        $claimedBadges = $memberOption->member()->getClaimedBadges();
+
+        return new MemberClaimedBadgesReadModel($claimedBadges);
     }
 }

@@ -17,16 +17,19 @@ use Badger\SharedSpace\Bus\Query\ReadModel;
 
 final class MemberClaimedBadgesReadModel implements ReadModel
 {
-    public array $badges = [];
+    public array $claimedBadges = [];
 
     public function __construct(array $badges)
     {
         foreach ($badges as $badge) {
-            $this->badges[] = [
-                'id' => $badge->id()->__toString(),
-                'title' => $badge->title()->__toString(),
-                'description' => $badge->description()->__toString(),
+            $this->claimedBadges[] = [
+                'id' => $badge->__toString(),
             ];
         }
+    }
+
+    public function getValue(): array
+    {
+        return $this->claimedBadges;
     }
 }

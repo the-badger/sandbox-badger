@@ -44,7 +44,6 @@ final class ListBadgesContext implements Context
 
         $badges = $this->queryBus->fetch($listAllBadges);
 
-        /* @phpstan-ignore-next-line */
-        Assert::eq(count($badges->badges), 2);
+        Assert::eq(count($badges->getValue()), 2);
     }
 }

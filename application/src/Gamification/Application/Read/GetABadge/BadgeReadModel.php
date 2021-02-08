@@ -28,4 +28,9 @@ final class BadgeReadModel implements ReadModel
         $this->title = $badge->title()->__toString();
         $this->description = $badge->description()->__toString();
     }
+
+    public function getValue(): array
+    {
+        return ['id' => $this->id, 'title' => $this->title, 'description' => $this->description];
+    }
 }

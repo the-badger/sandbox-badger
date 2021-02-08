@@ -21,6 +21,11 @@ final class ClaimedBadgesType extends JsonType
     {
         $value = \Safe\json_decode($value, true);
 
-        return new ImmSet($value);
+        return new ImmSet(...$value);
+    }
+
+    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    {
+        return \Safe\json_encode($value);
     }
 }

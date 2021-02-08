@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Test\Acceptance\Context;
 
+use Badger\Gamification\Application\Read\ListBadges\ListAllClaimedBadgesForAUser;
 use Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\Gamification\Domain\Member\Member;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\SharedSpace\Bus\Command\CommandBus;
+use Badger\SharedSpace\Bus\Query\QueryBus;
 use Behat\Behat\Context\Context;
+use Webmozart\Assert\Assert;
 
 final class ClaimABadgeContext implements Context
 {
@@ -27,19 +30,21 @@ final class ClaimABadgeContext implements Context
     private MemberRepository $memberRepository;
     private Store $store;
     private BadgeRepository $badgeRepository;
+    private QueryBus $queryBus;
 
-    public function __construct(Store $store, CommandBus $commandBus, MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function __construct(Store $store, CommandBus $commandBus, MemberRepository $memberRepository, BadgeRepository $badgeRepository, QueryBus $queryBus)
     {
         $this->commandBus = $commandBus;
         $this->memberRepository = $memberRepository;
         $this->store = $store;
         $this->badgeRepository = $badgeRepository;
+        $this->queryBus = $queryBus;
     }
 
     /**
-     * @Then I should be able to claim the badge :badgeTitle
+     * @When I claim the badge :badgeTitle
      */
-    public function iShouldBeAbleToClaimTheBadge(string $badgeTitle): void
+    public function iClaimTheBadge(string $badgeTitle): void
     {
         $memberOption = $this->memberRepository->findByName($this->store->getMemberName());
 
@@ -62,5 +67,20 @@ final class ClaimABadgeContext implements Context
         $claimABadge->badgeId = $badgeId;
 
         $this->commandBus->dispatch($claimABadge);
+    }
+
+    /**
+     * @Then I should see :numberOfClaimedBadge claimed badge
+     */
+    public function iShouldSeeClaimedBadge(int $numberOfClaimedBadge): void
+    {
+        $memberOption = $this->memberRepository->findByName($this->store->getMemberName());
+        $member = $memberOption->member();
+
+        $claimedBadgeForMember = new ListAllClaimedBadgesForAUser();
+        $claimedBadgeForMember->memberId = (string) $member->id();
+
+        $result = $this->queryBus->fetch($claimedBadgeForMember);
+        Assert::eq($numberOfClaimedBadge, count($result->getValue()));
     }
 }
