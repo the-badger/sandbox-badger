@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'pgsql://postgres:postgres@db:5432/postgres'
+        url: 'postgresql://postgres:postgres@db:5432/badger?serverVersion=11&charset=utf8'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
@@ -12,6 +12,7 @@ doctrine:
           badge_description: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeDescriptionType
           member_id: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberIdType
           member_name: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberNameType
+          claimed_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\ClaimedBadgesType
 
     orm:
         auto_generate_proxy_classes: true

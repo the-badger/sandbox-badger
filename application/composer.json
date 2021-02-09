@@ -29,7 +29,8 @@
         "phpspec/phpspec": "^6.1",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.2",
-        "phpstan/phpstan-doctrine": "^0.12.5"
+        "phpstan/phpstan-doctrine": "^0.12.5",
+        "php-ds/php-ds": "^1.2"
     },
     "config": {
         "preferred-install": {

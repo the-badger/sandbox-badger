@@ -12,11 +12,18 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
   command_handlers:
-    namespace: Badger\Gamification\Application\
-    resource: '%kernel.project_dir%/src/Gamification/Application/**/*Handler.php'
+    namespace: Badger\Gamification\Application\Write\
+    resource: '%kernel.project_dir%/src/Gamification/Application/Write/**/*Handler.php'
     autoconfigure: false
     tags:
       - { name: messenger.message_handler, bus: command.bus }
+
+  query_handlers:
+    namespace: Badger\Gamification\Application\Read\
+    resource: '%kernel.project_dir%/src/Gamification/Application/Read/**/*Handler.php'
+    autoconfigure: false
+    tags:
+      - { name: messenger.message_handler, bus: query.bus }
 
   controllers:
     namespace: Badger\Gamification\Infrastructure\UserInterface\Web\

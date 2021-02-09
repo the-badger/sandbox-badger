@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application\Write\ClaimABadge;
 
+use Badger\Gamification\Domain\Badge\BadgeDoesNotExistException;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
-use Badger\Gamification\Domain\Badge\UnexistingBadgeException;
 use Badger\Gamification\Domain\Member\MemberId;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\Gamification\Domain\Member\UnexistingMemberException;
@@ -45,7 +45,7 @@ final class ClaimABadgeHandler implements CommandHandler
         $badgeOption = $this->badgeRepository->get($badgeId);
 
         if ($badgeOption->isEmpty()) {
-            throw new UnexistingBadgeException($badgeId);
+            throw new BadgeDoesNotExistException($badgeId);
         }
 
         $member = $memberOption->member();

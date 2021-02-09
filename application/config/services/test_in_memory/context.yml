@@ -5,8 +5,3 @@ services:
 
     Badger\Gamification\Test\Acceptance\Context\:
         resource: '%kernel.project_dir%/src/Gamification/Test/Acceptance/Context/**/*.php'
-
-    Badger\Gamification\Test\EndToEnd\Api\Context\:
-        resource: '%kernel.project_dir%/src/Gamification/Test/EndToEnd/Api/Context/**/*.php'
-
-    Badger\SharedSpace\Tool\Behat\ApiTestHelper: ~

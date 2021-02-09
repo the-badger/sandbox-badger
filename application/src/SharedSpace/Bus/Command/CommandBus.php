@@ -13,37 +13,21 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Command;
 
-use Badger\SharedSpace\Bus\Command\Command;
-use Badger\SharedSpace\Bus\Command\IdentifierGeneratedStamp;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/**
- * Not final for testing purpose
- * Adapt Symfony Messenger because dispatch returns an Envelope marked as final.
- */
-class CommandBus
+final class CommandBus
 {
-    /** @var MessageBusInterface */
-    private $commandBus;
+    use HandleTrait;
 
     public function __construct(MessageBusInterface $commandBus)
     {
-        $this->commandBus = $commandBus;
+        $this->messageBus = $commandBus;
     }
 
-    /**
-     * @final
-     */
-    public function dispatch(Command $command): UuidInterface
+    /** @phpstan-ignore-next-line */
+    public function dispatch(Command $command)
     {
-        $envelope = $this->commandBus->dispatch($command);
-        /** @var IdentifierGeneratedStamp|null $stamp */
-        $stamp = $envelope->last(IdentifierGeneratedStamp::class);
-        if (null !== $stamp) {
-            return $stamp->uuid();
-        }
-
-        throw new \LogicException('Should have generated the identifier');
+        return $this->handle($command);
     }
 }

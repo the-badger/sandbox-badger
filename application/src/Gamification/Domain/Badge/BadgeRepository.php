@@ -24,4 +24,7 @@ interface BadgeRepository
     public function getBadgeByTitle(BadgeTitle $badgeTitle): BadgeOption;
 
     public function count(): int;
+
+    /** array<Badge> */
+    public function all(): array;
 }

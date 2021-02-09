@@ -32,7 +32,6 @@ final class MemberRepository implements MemberRepositoryInterface
     public function save(Member $member): void
     {
         $this->entityManager->persist($member);
-        $this->entityManager->flush();
     }
 
     public function get(MemberId $id): MemberOption

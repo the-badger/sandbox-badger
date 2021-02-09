@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Query;
 
-use Badger\SharedSpace\Bus\Query\ReadModel;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -30,9 +29,7 @@ class QueryBus
         $this->messageBus = $queryBus;
     }
 
-    /**
-     * @final
-     */
+    /** @phpstan-ignore-next-line */
     public function fetch(Query $query): ReadModel
     {
         return $this->handle($query);

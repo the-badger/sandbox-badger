@@ -19,10 +19,9 @@ class ClaimABadgeSpec extends ObjectBehavior
     function it_needs_properties()
     {
         $this
-            ->forAll(Uuid::any(), Uuid::any(), Uuid::any())
+            ->forAll(Uuid::any(), Uuid::any())
             ->take(1)
-            ->then(function (string $identifier, string $memberId, string $badgeId) {
-                $this->identifier = $identifier;
+            ->then(function (string $memberId, string $badgeId) {
                 $this->memberId = $memberId;
                 $this->badgeId = $badgeId;
             });

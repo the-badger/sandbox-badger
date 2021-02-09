@@ -16,6 +16,7 @@ namespace Badger\Gamification\Test\EndToEnd\Api\Context;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\SharedSpace\Tool\Behat\ApiTestHelper;
+use Badger\SharedSpace\Tool\Behat\Store;
 use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -24,15 +25,16 @@ final class CreateABadgeContext implements Context
 {
     private ApiTestHelper $apiTestHelper;
     private BadgeRepository $badgeRepository;
-    /** @var array<Badge> */
-    private array $badges = [];
+    private Store $store;
 
     public function __construct(
         ApiTestHelper $apiTestHelper,
-        BadgeRepository $badgeRepository
+        BadgeRepository $badgeRepository,
+        Store $store
     ) {
         $this->apiTestHelper = $apiTestHelper;
         $this->badgeRepository = $badgeRepository;
+        $this->store = $store;
     }
 
     /**
@@ -49,7 +51,7 @@ final class CreateABadgeContext implements Context
 
         $identifier = \Safe\json_decode((string) $response->getContent(), true)['badge_identifier'];
 
-        $this->badges[$badgeTitle] = $identifier;
+        $this->store->set($badgeTitle, $identifier);
 
         Assert::eq($response->getStatusCode(), Response::HTTP_ACCEPTED);
     }
@@ -57,8 +59,8 @@ final class CreateABadgeContext implements Context
     /**
      * @Then I should see :amount badge
      */
-    public function iShouldSeeBadge(int $amount): bool
+    public function iShouldSeeBadge(int $amount): void
     {
-        return true;
+        Assert::eq($this->badgeRepository->count(), $amount);
     }
 }

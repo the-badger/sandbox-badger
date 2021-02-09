@@ -20,12 +20,6 @@ final class ClaimABadge implements Command
 {
     use Immutable;
 
-    public ?string $identifier = null;
     public ?string $memberId = null;
     public ?string $badgeId = null;
-
-    public function identifierName(): string
-    {
-        return 'identifier';
-    }
 }

@@ -60,4 +60,9 @@ final class BadgeRepository implements BadgeRepositoryInterface
     {
         return count($this->entityManager->getRepository(Badge::class)->findAll());
     }
+
+    public function all(): array
+    {
+        return $this->entityManager->getRepository(Badge::class)->findAll();
+    }
 }

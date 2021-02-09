@@ -105,6 +105,9 @@
             "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
         }
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "gnugat/redaktilo": {
         "version": "v1.7.3"
     },
@@ -193,6 +196,9 @@
         "version": "7.4"
     },
     "php-cs-fixer/diff": {
+        "version": "v1.3.0"
+    },
+    "php-ds/php-ds": {
         "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {

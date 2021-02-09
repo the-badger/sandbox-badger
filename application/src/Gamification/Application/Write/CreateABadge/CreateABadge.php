@@ -20,12 +20,6 @@ final class CreateABadge implements Command
 {
     use Immutable;
 
-    public ?string $badgeId = null;
     public ?string $title = null;
     public ?string $description = null;
-
-    public function identifierName(): string
-    {
-        return 'badgeId';
-    }
 }

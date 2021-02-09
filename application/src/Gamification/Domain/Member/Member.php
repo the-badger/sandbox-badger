@@ -26,12 +26,17 @@ class Member
     {
         $this->id = $id;
         $this->memberName = $memberName;
-        $this->claimedBadges = new ImmSet([]);
+        $this->claimedBadges = new ImmSet();
     }
 
     public function claimABadge(BadgeId $badgeId): void
     {
         $this->claimedBadges = $this->claimedBadges->plus($badgeId);
+    }
+
+    public function getClaimedBadges(): array
+    {
+        return $this->claimedBadges->toArray();
     }
 
     public function id(): MemberId

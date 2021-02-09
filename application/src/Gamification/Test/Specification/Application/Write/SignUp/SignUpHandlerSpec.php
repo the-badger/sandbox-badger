@@ -10,6 +10,7 @@ use Badger\Gamification\Domain\Member\MemberName;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
 
 class SignUpHandlerSpec extends ObjectBehavior
@@ -29,12 +30,8 @@ class SignUpHandlerSpec extends ObjectBehavior
     {
         $signUp = new SignUp();
         $signUp->badgerUserName = 'michel';
-        $signUp->identifier = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'michel');
-        $memberId = MemberId::fromUuidString($signUp->identifier);
-        $memberName = MemberName::fromString($signUp->badgerUserName);
-        $member = new Member($memberId, $memberName);
 
-        $memberRepository->save($member)->shouldBeCalled();
+        $memberRepository->save(Argument::type(Member::class))->shouldBeCalled();
 
         $this->__invoke($signUp);
     }

@@ -30,12 +30,14 @@ final class CreateABadgeHandler implements CommandHandler
         $this->badgeRepository = $badgeRepository;
     }
 
-    public function __invoke(CreateABadge $createABadge): void
+    public function __invoke(CreateABadge $createABadge): string
     {
-        $badgeId = new BadgeId(Uuid::fromString($createABadge->badgeId));
+        $badgeId = new BadgeId(Uuid::uuid4());
         $badgeTitle = BadgeTitle::fromString($createABadge->title);
         $badgeDescription = BadgeDescription::fromString($createABadge->description);
 
         $this->badgeRepository->save(new Badge($badgeId, $badgeTitle, $badgeDescription));
+
+        return $badgeId->__toString();
     }
 }

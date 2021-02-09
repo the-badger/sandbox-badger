@@ -20,7 +20,7 @@ start: ## Start the project
 	$(DOCKER_COMPOSE) up -d --remove-orphan ${C}
 
 .PHONY: stop
-stop: ## Stop the projet
+stop: ## Stop the project
 	$(DOCKER_COMPOSE) stop
 
 .PHONY: down
@@ -101,3 +101,8 @@ gamification-back: gamification-back-static gamification-phpspec gamification-ac
 
 .PHONY: gamification ## Run all the gamification tests
 gamification: gamification-back
+
+.PHONY: init-db
+init-db:
+	$(PHP_RUN) bin/console doctrine:database:create
+	$(PHP_RUN) bin/console doctrine:schema:update --force

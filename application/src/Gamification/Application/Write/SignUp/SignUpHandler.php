@@ -7,6 +7,7 @@ use Badger\Gamification\Domain\Member\MemberId;
 use Badger\Gamification\Domain\Member\MemberName;
 use Badger\Gamification\Domain\Member\MemberRepository;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
+use Ramsey\Uuid\Uuid;
 
 final class SignUpHandler implements CommandHandler
 {
@@ -20,7 +21,7 @@ final class SignUpHandler implements CommandHandler
     public function __invoke(SignUp $signUp): void
     {
         $member = new Member(
-            MemberId::fromUuidString($signUp->identifier),
+            MemberId::fromUuidString(Uuid::uuid4()->toString()),
             MemberName::fromString($signUp->badgerUserName)
         );
 

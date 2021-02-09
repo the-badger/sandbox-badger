@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Query;
 
-final class ReadModel
-{
-
+interface ReadModel {
+    public function getValue(): array;
 }
