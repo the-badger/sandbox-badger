@@ -20,7 +20,7 @@ use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class ClaimABadgeContext implements Context
+final class AcceptABadgeContext implements Context
 {
     private ApiTestHelper $apiTestHelper;
     private BadgeRepository $badgeRepository;
@@ -37,27 +37,27 @@ final class ClaimABadgeContext implements Context
     }
 
     /**
-     * @When I claim the badge :badgeTitle
+     * @When I accept the badge :badgeTitle
      *
      * @throws \Safe\Exceptions\JsonException
      */
-    public function iClaimTheBadge(string $badgeTitle): void
+    public function iAcceptTheBadge(string $badgeTitle): void
     {
         $content = ['badgeId' => $this->store->get($badgeTitle), 'memberId' => '285bc91b-8416-4159-bf7a-b00144298f72'];
 
-        $response = $this->apiTestHelper->jsonPost($content, 'claim_a_badge');
+        $response = $this->apiTestHelper->jsonPost($content, 'accept_a_badge');
 
         Assert::eq($response->getStatusCode(), Response::HTTP_ACCEPTED);
     }
 
     /**
-     * @Then I should see :numberOfClaimedBadge claimed badge
+     * @Then I should see :numberOfEarnedBadge earned badge
      */
-    public function iShouldSeeClaimedBadge(int $numberOfClaimedBadge): void
+    public function iShouldSeeEarnedBadge(int $numberOfEarnedBadge): void
     {
         $content = ['memberId' => '285bc91b-8416-4159-bf7a-b00144298f72'];
 
-        $response = $this->apiTestHelper->jsonGet([], 'list_all_claimed_badges_for_a_user', $content);
+        $response = $this->apiTestHelper->jsonGet([], 'list_all_earned_badges_for_a_user', $content);
 
         Assert::eq($response->getStatusCode(), Response::HTTP_ACCEPTED);
     }

@@ -1,6 +1,6 @@
 Feature: Accept a badge
 
-  @acceptance
+  @acceptance @end-to-end-api
   Scenario: Accept a badge
     Given a badger member Michel
     And a badge "My name is Michel" "A superb badge"

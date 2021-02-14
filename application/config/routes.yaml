@@ -8,6 +8,16 @@ claim_a_badge:
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\ClaimABadgeController,  _format: json }
   methods:  [POST]
 
+accept_a_badge:
+  path:     /api/badge/accept
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\AcceptABadgeController,  _format: json }
+  methods:  [POST]
+
+refuse_a_badge:
+  path:     /api/badge/refuse
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\RefuseABadgeController,  _format: json }
+  methods:  [POST]
+
 list_all_badges:
   path:     /api/badge/list
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetBadgesListController,  _format: json }
@@ -16,6 +26,11 @@ list_all_badges:
 list_all_claimed_badges_for_a_user:
   path:     /api/badge/claimed/list/{memberId}
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetMemberClaimedBadgesListController,  _format: json }
+  methods:  [GET]
+
+list_all_earned_badges_for_a_user:
+  path:     /api/badge/earned/list/{memberId}
+  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetMemberEarnedBadgesListController,  _format: json }
   methods:  [GET]
 
 get_a_badge:
