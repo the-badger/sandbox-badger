@@ -99,8 +99,8 @@ gamification-end-to-end-api: ## Run Gamification end to end tests
 .PHONY: gamification-back
 gamification-back: gamification-back-static gamification-phpspec gamification-acceptance gamification-end-to-end-api
 
-.PHONY: gamification ## Run all the gamification tests
-gamification: gamification-back
+.PHONY: gamification-tests ## Run all the gamification tests
+gamification-tests: gamification-back
 
 .PHONY: init-db
 init-db:

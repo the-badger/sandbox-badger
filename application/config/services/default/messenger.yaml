@@ -12,7 +12,6 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
   Badger\SharedSpace\Bus\Command\CommandBus: ~
-  Badger\SharedSpace\Bus\Command\IdentifierMiddleware: ~
 
   Badger\SharedSpace\Bus\Query\QueryBus: ~
   Badger\SharedSpace\Bus\Event\EventBus: ~

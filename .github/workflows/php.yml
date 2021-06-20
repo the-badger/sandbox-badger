@@ -27,4 +27,4 @@ jobs:
       run: make init-db
 
     - name: run tests on gamification
-      run: make gamification
+      run: make gamification-tests
