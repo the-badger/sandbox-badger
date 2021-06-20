@@ -36,4 +36,3 @@ class CreateABadgeHandlerSpec extends ObjectBehavior
         $this->__invoke($command);
     }
 }
-

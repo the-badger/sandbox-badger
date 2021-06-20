@@ -7,6 +7,7 @@ use Badger\Gamification\Application\Write\AcceptABadge\AcceptABadgeHandler;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeDescription;
 use Badger\Gamification\Domain\Badge\BadgeId;
+use Badger\Gamification\Domain\Badge\BadgePoints;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
@@ -42,6 +43,7 @@ class AcceptABadgeHandlerSpec extends ObjectBehavior
 
         $memberId = new MemberId($memberId);
         $badgeId = new BadgeId($badgeId);
+        $badgePoints = BadgePoints::fromInt(50);
         $badgeTitle = BadgeTitle::fromString('Michel Sardou');
         $badgeDescription = BadgeDescription::fromString('You unlocked the very rare Michel Sardou badge!');
         $memberName = MemberName::fromString('michel');
@@ -50,7 +52,7 @@ class AcceptABadgeHandlerSpec extends ObjectBehavior
         $memberOption = MemberOption::some($badgerMember);
         $memberRepository->get($memberId)->willReturn($memberOption);
 
-        $badge = new Badge($badgeId, $badgeTitle, $badgeDescription);
+        $badge = new Badge($badgeId, $badgeTitle, $badgeDescription, $badgePoints);
         $badgeOption = BadgeOption::some($badge);
         $badgeRepository->get($badgeId)->willReturn($badgeOption);
 
