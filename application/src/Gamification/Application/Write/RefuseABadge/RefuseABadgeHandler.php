@@ -55,7 +55,7 @@ final class RefuseABadgeHandler implements CommandHandler
             throw new BadgeNotInClaimedListException($badgeId);
         }
 
-        $member->claimedBadges->minus($badgeId);
+        $member->claimedBadges = $member->claimedBadges->minus($badgeId);
 
         $this->memberRepository->save($member);
     }

@@ -50,7 +50,7 @@ final class AcceptABadgeHandler implements CommandHandler
 
         $member = $memberOption->member();
         if ($member->claimedBadges->contains($badgeId)) {
-            $member->claimedBadges->minus($badgeId);
+            $member->claimedBadges = $member->claimedBadges->minus($badgeId);
         }
 
         $member->earnABadge($badgeId);
