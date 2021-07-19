@@ -16,6 +16,7 @@ namespace Specification\Badger\Gamification\Infrastructure\Storage\InMemory\Badg
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeDescription;
 use Badger\Gamification\Domain\Badge\BadgeId;
+use Badger\Gamification\Domain\Badge\BadgeScore;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
 use Badger\Gamification\Infrastructure\Storage\InMemory\Badge\InMemoryBadgeRepository;
@@ -58,7 +59,7 @@ class InMemoryBadgeRepositorySpec extends ObjectBehavior
 
     private function badge(): Badge
     {
-        return new Badge(new BadgeId(Uuid::uuid5(Uuid::NAMESPACE_DNS, 'badger_id')), BadgeTitle::fromString('A Badge title'), BadgeDescription::fromString('Your awesome badge description!'));
+        return new Badge(new BadgeId(Uuid::uuid5(Uuid::NAMESPACE_DNS, 'badger_id')), BadgeTitle::fromString('A Badge title'), BadgeDescription::fromString('Your awesome badge description!'), BadgeScore::fromInt(50));
     }
 
     function getMatchers(): array

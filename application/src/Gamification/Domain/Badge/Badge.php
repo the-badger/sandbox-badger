@@ -18,12 +18,14 @@ class Badge
     private BadgeId $id;
     private BadgeTitle $title;
     private BadgeDescription $description;
+    private BadgeScore $score;
 
-    public function __construct(BadgeId $id, BadgeTitle $title, BadgeDescription $description)
+    public function __construct(BadgeId $id, BadgeTitle $title, BadgeDescription $description, BadgeScore $badgeScore)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
+        $this->score = $badgeScore;
     }
 
     public function id(): BadgeId
@@ -39,5 +41,10 @@ class Badge
     public function description(): BadgeDescription
     {
         return $this->description;
+    }
+
+    public function score(): BadgeScore
+    {
+        return $this->score;
     }
 }
