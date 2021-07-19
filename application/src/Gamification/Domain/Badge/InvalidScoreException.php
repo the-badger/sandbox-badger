@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Domain\Badge;
 
-class InvalidNumberOfPointsException extends \InvalidArgumentException
+class InvalidScoreException extends \InvalidArgumentException
 {
     public function __construct()
     {
-        parent::__construct('The number of points is invalid');
+        parent::__construct('The score number is invalid');
     }
 }

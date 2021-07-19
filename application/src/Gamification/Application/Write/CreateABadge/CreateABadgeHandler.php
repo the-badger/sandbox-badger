@@ -16,7 +16,7 @@ namespace Badger\Gamification\Application\Write\CreateABadge;
 use Badger\Gamification\Domain\Badge\Badge;
 use Badger\Gamification\Domain\Badge\BadgeDescription;
 use Badger\Gamification\Domain\Badge\BadgeId;
-use Badger\Gamification\Domain\Badge\BadgePoints;
+use Badger\Gamification\Domain\Badge\BadgeScore;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
@@ -36,9 +36,9 @@ final class CreateABadgeHandler implements CommandHandler
         $badgeId = new BadgeId(Uuid::uuid4());
         $badgeTitle = BadgeTitle::fromString($createABadge->title);
         $badgeDescription = BadgeDescription::fromString($createABadge->description);
-        $badgePoints = BadgePoints::fromInt(50);
+        $badgeScore = BadgeScore::fromInt(50);
 
-        $this->badgeRepository->save(new Badge($badgeId, $badgeTitle, $badgeDescription, $badgePoints));
+        $this->badgeRepository->save(new Badge($badgeId, $badgeTitle, $badgeDescription, $badgeScore));
 
         return $badgeId->__toString();
     }
