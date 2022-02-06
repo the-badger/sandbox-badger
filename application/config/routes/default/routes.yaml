@@ -1,4 +1,0 @@
-create_badge:
-  path:     /api/badge/create
-  defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Write\CreateABadgeController,  _format: json }
-  methods:  [POST]

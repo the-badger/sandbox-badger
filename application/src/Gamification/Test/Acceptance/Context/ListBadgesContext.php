@@ -15,7 +15,7 @@ namespace Badger\Gamification\Test\Acceptance\Context;
 
 use Badger\Gamification\Application\Read\ListBadges\ListAllBadges;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
-use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
 use Badger\SharedSpace\Bus\Query\QueryBus;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
@@ -23,11 +23,11 @@ use Webmozart\Assert\Assert;
 final class ListBadgesContext implements Context
 {
     private QueryBus $queryBus;
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberRepository;
     private Store $store;
     private BadgeRepository $badgeRepository;
 
-    public function __construct(Store $store, QueryBus $queryBus, MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function __construct(Store $store, QueryBus $queryBus, MemberBadgesRepository $memberRepository, BadgeRepository $badgeRepository)
     {
         $this->queryBus = $queryBus;
         $this->memberRepository = $memberRepository;

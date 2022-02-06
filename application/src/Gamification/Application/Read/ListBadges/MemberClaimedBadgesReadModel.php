@@ -23,7 +23,9 @@ final class MemberClaimedBadgesReadModel implements ReadModel
     {
         foreach ($badges as $badge) {
             $this->claimedBadges[] = [
-                'id' => $badge->__toString(),
+                'id' => $badge->id()->__toString(),
+                'title' => $badge->title()->__toString(),
+                'description' => $badge->description()->__toString(),
             ];
         }
     }

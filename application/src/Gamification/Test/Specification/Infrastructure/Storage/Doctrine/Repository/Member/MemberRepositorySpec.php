@@ -2,8 +2,8 @@
 
 namespace Specification\Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Member;
 
-use Badger\Gamification\Domain\Member\MemberRepository as MemberRepositoryInterface;
-use Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Member\MemberRepository;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository as MemberRepositoryInterface;
+use Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\MemberBadges\MemberBadgesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 
@@ -16,7 +16,7 @@ class MemberRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(MemberRepository::class);
+        $this->shouldHaveType(MemberBadgesRepository::class);
     }
 
     function it_should_implement()

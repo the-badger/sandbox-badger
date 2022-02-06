@@ -14,6 +14,7 @@ Badger\Gamification\Domain\Badge\Badge:
             nullable: false
         description:
             type: badge_description
-            unique: true
             length: 255
             nullable: false
+        badgeScore:
+            type: badge_score

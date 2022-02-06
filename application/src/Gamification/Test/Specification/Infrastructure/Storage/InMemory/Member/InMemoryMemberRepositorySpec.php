@@ -2,15 +2,15 @@
 
 namespace Specification\Badger\Gamification\Infrastructure\Storage\InMemory\Member;
 
-use Badger\Gamification\Domain\Member\MemberRepository;
-use Badger\Gamification\Infrastructure\Storage\InMemory\Member\InMemoryMemberRepository;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
+use Badger\Gamification\Infrastructure\Storage\InMemory\Member\InMemoryMemberBadgesRepository;
 use PhpSpec\ObjectBehavior;
 
 class InMemoryMemberRepositorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(InMemoryMemberRepository::class);
-        $this->shouldImplement(MemberRepository::class);
+        $this->shouldHaveType(InMemoryMemberBadgesRepository::class);
+        $this->shouldImplement(MemberBadgesRepository::class);
     }
 }

@@ -18,6 +18,13 @@ services:
     tags:
       - { name: messenger.message_handler, bus: command.bus }
 
+  event_handlers:
+    namespace: Badger\Gamification\Application\Event\
+    resource: '%kernel.project_dir%/src/Gamification/Application/Event/**/*Handler.php'
+    autoconfigure: false
+    tags:
+      - { name: messenger.message_handler, bus: event.bus }
+
   query_handlers:
     namespace: Badger\Gamification\Application\Read\
     resource: '%kernel.project_dir%/src/Gamification/Application/Read/**/*Handler.php'
@@ -32,16 +39,11 @@ services:
     tags:
       - { name: controller.service_arguments }
 
-#  query_handlers:
-#    namespace: Gamification\
-#    resource: '%kernel.project_dir%/src/**/Read/**/*Handler.php'
-#    autoconfigure: false
-#    tags:
-#      - { name: messenger.message_handler, bus: query.bus }
+  Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository:
+    class: 'Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\MemberBadges\MemberBadgesRepository'
 
-
-  Badger\Gamification\Domain\Member\MemberRepository:
-    class: 'Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Member\MemberRepository'
+  Badger\Gamification\Domain\Score\UserScoreComputation:
+    class: 'Badger\Gamification\Domain\Score\UserScoreComputation'
 
   Badger\Gamification\Domain\Badge\BadgeRepository:
     class: 'Badger\Gamification\Infrastructure\Storage\Doctrine\Repository\Badge\BadgeRepository'

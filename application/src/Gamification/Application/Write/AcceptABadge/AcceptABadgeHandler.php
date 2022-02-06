@@ -13,34 +13,37 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application\Write\AcceptABadge;
 
+use Badger\Gamification\Application\Event\BadgeAccepted;
 use Badger\Gamification\Domain\Badge\BadgeDoesNotExistException;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberRepository;
-use Badger\Gamification\Domain\Member\UnexistingMemberException;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
+use Badger\Gamification\Domain\MemberBadges\NoMemberBadgesException;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
+use Badger\SharedSpace\Bus\Event\EventBus;
 
 final class AcceptABadgeHandler implements CommandHandler
 {
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberBadgesRepository;
     private BadgeRepository $badgeRepository;
+    private EventBus $eventBus;
 
-    public function __construct(MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function __construct(MemberBadgesRepository $memberBadgesRepository, BadgeRepository $badgeRepository, EventBus $eventBus)
     {
-        $this->memberRepository = $memberRepository;
+        $this->memberBadgesRepository = $memberBadgesRepository;
         $this->badgeRepository = $badgeRepository;
+        $this->eventBus = $eventBus;
     }
 
     public function __invoke(AcceptABadge $acceptABadge): void
     {
         $memberId = MemberId::fromUuidString($acceptABadge->memberId);
-        $memberOption = $this->memberRepository->get($memberId);
+        $memberBadgesOption = $this->memberBadgesRepository->get($memberId);
 
-        if ($memberOption->isEmpty()) {
-            throw new UnexistingMemberException($memberId);
+        if ($memberBadgesOption->isEmpty()) {
+            throw new NoMemberBadgesException($memberId);
         }
-
         $badgeId = BadgeId::fromUuidString($acceptABadge->badgeId);
         $badgeOption = $this->badgeRepository->get($badgeId);
 
@@ -48,13 +51,19 @@ final class AcceptABadgeHandler implements CommandHandler
             throw new BadgeDoesNotExistException($badgeId);
         }
 
-        $member = $memberOption->member();
-        if ($member->claimedBadges->contains($badgeId)) {
-            $member->claimedBadges = $member->claimedBadges->minus($badgeId);
+        $memberBadges = $memberBadgesOption->member();
+        if ($memberBadges->claimedBadges->contains($badgeId)) {
+            $memberBadges->claimedBadges = $memberBadges->claimedBadges->minus($badgeId);
         }
 
-        $member->earnABadge($badgeId);
+        $memberBadges->earnABadge($badgeId);
 
-        $this->memberRepository->save($member);
+        $this->memberBadgesRepository->save($memberBadges);
+
+        $badgeAccepted = new BadgeAccepted();
+        $badgeAccepted->memberId = $acceptABadge->memberId;
+        $badgeAccepted->badgeId = $acceptABadge->badgeId;
+
+        $this->eventBus->dispatchAfter($badgeAccepted);
     }
 }

@@ -37,3 +37,8 @@ get_a_badge:
   path:     /api/badge/get/{badgeId}
   defaults: { _controller: Badger\Gamification\Infrastructure\UserInterface\Web\Read\GetABadgeController,  _format: json }
   methods:  [GET]
+
+get_leaderboard:
+  path:     /api/leaderboard
+  defaults: { _controller: Badger\Leaderboard\Infrastructure\UserInterface\Web\Read\GetLeaderboardController,  _format: json }
+  methods:  [GET]

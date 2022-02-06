@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Domain\Badge;
 
+use Badger\Gamification\Domain\InvalidScoreException;
+
 final class BadgeScore
 {
     private const MAX = 50;

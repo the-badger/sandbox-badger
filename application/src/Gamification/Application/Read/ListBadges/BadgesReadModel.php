@@ -26,6 +26,7 @@ final class BadgesReadModel implements ReadModel
                 'id' => $badge->id()->__toString(),
                 'title' => $badge->title()->__toString(),
                 'description' => $badge->description()->__toString(),
+                'score' => $badge->score()->get(),
             ];
         }
     }

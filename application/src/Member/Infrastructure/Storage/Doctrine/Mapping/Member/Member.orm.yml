@@ -1,0 +1,13 @@
+Badger\Member\Domain\Member\Member:
+    type: entity
+    table: member
+    fields:
+        id:
+            id: true
+            type: member_id
+            generator:
+                strategy: NONE
+        claimedBadges:
+            type: claimed_badges
+        earnedBadges:
+            type: earned_badges

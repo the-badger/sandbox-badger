@@ -1,5 +1,6 @@
-Badger\Gamification\Application\Write\CreateABadge:
-  title:
-    - NotBlank: ~
-  description:
-    - NotBlank: ~
+Badger\Gamification\Application\Write\CreateABadge\CreateABadge:
+  properties:
+    title:
+      - NotBlank: { message: 'The title cannot be empty' }
+    description:
+      - NotBlank: { message: 'The description cannot be empty' }

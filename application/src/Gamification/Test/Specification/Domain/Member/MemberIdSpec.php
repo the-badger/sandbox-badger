@@ -2,7 +2,7 @@
 
 namespace Specification\Badger\Gamification\Domain\Member;
 
-use Badger\Gamification\Domain\Member\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
 

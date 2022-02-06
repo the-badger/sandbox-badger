@@ -3,6 +3,8 @@
 namespace Badger\SharedSpace\Symfony;
 
 use Badger\Gamification\Infrastructure\Symfony\GamificationContainerExtension;
+use Badger\Leaderboard\Infrastructure\Symfony\LeaderboardContainerExtension;
+use Badger\Member\Infrastructure\Symfony\MemberContainerExtension;
 use Badger\SharedSpace\Symfony\Container\BoundedContextExtension;
 use Badger\SharedSpace\Symfony\Container\Compiler\RegisterYamlValidationFile;
 use Badger\SharedSpace\Symfony\Container\SymfonyExtension;
@@ -18,12 +20,12 @@ class Kernel extends BaseKernel
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return $this->getProjectDir().'/var/cache/'.$this->environment;
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->getProjectDir().'/var/log';
     }
@@ -38,9 +40,6 @@ class Kernel extends BaseKernel
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('container.dumper.inline_class_loader', true);
@@ -72,11 +71,6 @@ class Kernel extends BaseKernel
         $containerBuilder->addCompilerPass(new RegisterYamlValidationFile($boundedContext->path()));
     }
 
-    /**
-     * @param string|null $extraPath
-     *
-     * @return string
-     */
     private function getProjectPath(string $extraPath = null): string
     {
         $path = $this->getProjectDir().'/';
@@ -88,13 +82,12 @@ class Kernel extends BaseKernel
         return $path;
     }
 
-    /**
-     * @return string[]
-     */
     private function registeredBoundedContext(): array
     {
         return [
             new GamificationContainerExtension(),
+            new MemberContainerExtension(),
+            new LeaderboardContainerExtension(),
         ];
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Badger\Gamification\Test\Acceptance\Context;
 
 use Badger\Gamification\Application\Write\SignUp\SignUp;
-use Badger\Gamification\Domain\Member\MemberName;
+use Badger\Gamification\Domain\MemberBadges\MemberName;
 use Badger\SharedSpace\Bus\Command\CommandBus;
 use Behat\Behat\Context\Context;
 

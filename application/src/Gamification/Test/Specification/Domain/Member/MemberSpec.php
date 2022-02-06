@@ -2,9 +2,9 @@
 
 namespace Specification\Badger\Gamification\Domain\Member;
 
-use Badger\Gamification\Domain\Member\Member;
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberName;
+use Badger\Gamification\Domain\MemberBadges\MemberBadges;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberName;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
@@ -18,7 +18,7 @@ class MemberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Member::class);
+        $this->shouldHaveType(MemberBadges::class);
     }
 
     function it_has_an_id()

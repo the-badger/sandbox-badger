@@ -13,36 +13,24 @@ declare(strict_types=1);
 
 namespace Badger\SharedSpace\Bus\Event;
 
-use Badger\SharedSpace\Bus\Event\Event;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-/**
- * Not final for testing purpose
- * Adapt Symfony Messenger because dispatch returns an Envelope marked as final.
- */
-class EventBus
+final class EventBus
 {
-    /** @var MessageBusInterface */
-    private $eventBus;
+    private MessageBusInterface $eventBus;
 
     public function __construct(MessageBusInterface $eventBus)
     {
         $this->eventBus = $eventBus;
     }
 
-    /**
-     * @final
-     */
     public function dispatch(Event $event): void
     {
         $this->eventBus->dispatch($event);
     }
 
-    /**
-     * @final
-     */
     public function dispatchAfter(Event $event): void
     {
         $this

@@ -16,8 +16,8 @@ namespace Badger\Gamification\Test\Acceptance\Context;
 use Badger\Gamification\Application\Write\RefuseABadge\RefuseABadge;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
-use Badger\Gamification\Domain\Member\Member;
-use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\Gamification\Domain\MemberBadges\MemberBadges;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
 use Badger\SharedSpace\Bus\Command\CommandBus;
 use Badger\SharedSpace\Bus\Query\QueryBus;
 use Behat\Behat\Context\Context;
@@ -25,12 +25,12 @@ use Behat\Behat\Context\Context;
 final class RefuseABadgeContext implements Context
 {
     private CommandBus $commandBus;
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberRepository;
     private Store $store;
     private BadgeRepository $badgeRepository;
     private QueryBus $queryBus;
 
-    public function __construct(Store $store, CommandBus $commandBus, MemberRepository $memberRepository, BadgeRepository $badgeRepository, QueryBus $queryBus)
+    public function __construct(Store $store, CommandBus $commandBus, MemberBadgesRepository $memberRepository, BadgeRepository $badgeRepository, QueryBus $queryBus)
     {
         $this->commandBus = $commandBus;
         $this->memberRepository = $memberRepository;
@@ -50,7 +50,7 @@ final class RefuseABadgeContext implements Context
             throw new \LogicException('The member does not exist');
         }
 
-        /** @var Member $member */
+        /** @var MemberBadges $member */
         $member = $memberOption->member();
         $badgeOption = $this->badgeRepository->getBadgeByTitle(BadgeTitle::fromString($badgeTitle));
 

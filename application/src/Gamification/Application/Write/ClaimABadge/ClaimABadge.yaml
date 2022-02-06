@@ -1,6 +1,8 @@
 Badger\Gamification\Application\Write\ClaimABadge\ClaimABadge:
   properties:
     badgeId:
-      - Uuid: ~
+      - Uuid: { message: 'The attribute badgeId should be valid' }
+      - NotBlank: { message: 'The attribute badgeId cannot be empty' }
     memberId:
-      - Uuid: ~
+      - Uuid: { message: 'The attribute memberId should be valid' }
+      - NotBlank: { message: 'The attribute memberId cannot be empty' }

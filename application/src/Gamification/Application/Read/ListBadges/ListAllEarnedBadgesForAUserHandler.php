@@ -13,31 +13,39 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Application\Read\ListBadges;
 
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberRepository;
-use Badger\Gamification\Domain\Member\UnexistingMemberException;
+use Badger\Gamification\Domain\Badge\BadgeRepository;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
+use Badger\Gamification\Domain\MemberBadges\NoMemberBadgesException;
 use Badger\SharedSpace\Bus\Query\QueryHandler;
 use Badger\SharedSpace\Bus\Query\ReadModel;
 
 final class ListAllEarnedBadgesForAUserHandler implements QueryHandler
 {
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberBadgesRepository;
+    private BadgeRepository $badgeRepository;
 
-    public function __construct(MemberRepository $memberRepository)
+    public function __construct(MemberBadgesRepository $memberBadgesRepository, BadgeRepository $badgeRepository)
     {
-        $this->memberRepository = $memberRepository;
+        $this->memberBadgesRepository = $memberBadgesRepository;
+        $this->badgeRepository = $badgeRepository;
     }
 
     public function __invoke(ListAllEarnedBadgesForAUser $listAllEarnedBadgesForAUser): ReadModel
     {
-        $memberOption = $this->memberRepository->get(MemberId::fromUuidString($listAllEarnedBadgesForAUser->memberId));
+        $memberOption = $this->memberBadgesRepository->get(MemberId::fromUuidString($listAllEarnedBadgesForAUser->memberId));
 
         if ($memberOption->isEmpty()) {
-            throw new UnexistingMemberException(MemberId::fromUuidString($listAllEarnedBadgesForAUser->memberId));
+            throw new NoMemberBadgesException(MemberId::fromUuidString($listAllEarnedBadgesForAUser->memberId));
         }
 
-        $earnedBadges = $memberOption->member()->getEarnedBadges();
+        $earnedBadgeIds = $memberOption->member()->getEarnedBadges();
 
-        return new MemberClaimedBadgesReadModel($earnedBadges);
+        $badges = [];
+        foreach ($earnedBadgeIds as $badgeId) {
+            $badges[] = $this->badgeRepository->get($badgeId)->badge(); //TODO: check if badge exists before (could have been deleted in between)
+        }
+
+        return new MemberClaimedBadgesReadModel($badges);
     }
 }

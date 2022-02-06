@@ -1,8 +1,8 @@
 <?php
 
-namespace Specification\Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member;
+namespace Specification\Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\MemberBadges;
 
-use Badger\Gamification\Domain\Member\MemberName;
+use Badger\Gamification\Domain\MemberBadges\MemberName;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 use PhpSpec\ObjectBehavior;

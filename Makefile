@@ -17,7 +17,7 @@ help:
 
 .PHONY: start
 start: ## Start the project
-	$(DOCKER_COMPOSE) up -d --remove-orphan ${C}
+	$(DOCKER_COMPOSE) up -d ${C}
 
 .PHONY: stop
 stop: ## Stop the project
@@ -50,7 +50,7 @@ application/vendor: application/composer.lock
 	$(PHP_RUN) /usr/local/bin/composer install
 
 .PHONY: cache
-cache: application/vendor ## Remove the cache
+cache: ## Remove the cache
 	rm -rf var/cache && $(PHP_RUN) bin/console cache:warmup
 
 .PHONY: sf
@@ -104,5 +104,6 @@ gamification-tests: gamification-back
 
 .PHONY: init-db
 init-db:
+	$(PHP_RUN) bin/console doctrine:database:drop --force
 	$(PHP_RUN) bin/console doctrine:database:create
 	$(PHP_RUN) bin/console doctrine:schema:update --force

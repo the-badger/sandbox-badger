@@ -36,9 +36,8 @@ final class CreateABadgeHandler implements CommandHandler
         $badgeId = new BadgeId(Uuid::uuid4());
         $badgeTitle = BadgeTitle::fromString($createABadge->title);
         $badgeDescription = BadgeDescription::fromString($createABadge->description);
-        $badgeScore = BadgeScore::fromInt(50);
 
-        $this->badgeRepository->save(new Badge($badgeId, $badgeTitle, $badgeDescription, $badgeScore));
+        $this->badgeRepository->save(new Badge($badgeId, $badgeTitle, $badgeDescription));
 
         return $badgeId->__toString();
     }

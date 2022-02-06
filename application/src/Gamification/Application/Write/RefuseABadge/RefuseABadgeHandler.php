@@ -17,17 +17,17 @@ use Badger\Gamification\Domain\Badge\BadgeDoesNotExistException;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeNotInClaimedListException;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberRepository;
-use Badger\Gamification\Domain\Member\UnexistingMemberException;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
+use Badger\Gamification\Domain\MemberBadges\NoMemberBadgesException;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
 
 final class RefuseABadgeHandler implements CommandHandler
 {
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberRepository;
     private BadgeRepository $badgeRepository;
 
-    public function __construct(MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function __construct(MemberBadgesRepository $memberRepository, BadgeRepository $badgeRepository)
     {
         $this->memberRepository = $memberRepository;
         $this->badgeRepository = $badgeRepository;
@@ -39,7 +39,7 @@ final class RefuseABadgeHandler implements CommandHandler
         $memberOption = $this->memberRepository->get($memberId);
 
         if ($memberOption->isEmpty()) {
-            throw new UnexistingMemberException($memberId);
+            throw new NoMemberBadgesException($memberId);
         }
 
         $badgeId = BadgeId::fromUuidString($refuseABadge->badgeId);

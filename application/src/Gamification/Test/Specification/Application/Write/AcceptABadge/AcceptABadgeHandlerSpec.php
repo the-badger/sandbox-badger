@@ -11,18 +11,18 @@ use Badger\Gamification\Domain\Badge\BadgeScore;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
 use Badger\Gamification\Domain\Badge\BadgeTitle;
 use Badger\Gamification\Domain\Badge\MaybeBadge\BadgeOption;
-use Badger\Gamification\Domain\Member\MaybeMember\MemberOption;
-use Badger\Gamification\Domain\Member\Member;
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberName;
-use Badger\Gamification\Domain\Member\MemberRepository;
+use Badger\Gamification\Domain\MemberBadges\MaybeMember\MemberOption;
+use Badger\Gamification\Domain\MemberBadges\MemberBadges;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberName;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
 
 class AcceptABadgeHandlerSpec extends ObjectBehavior
 {
-    public function let(MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function let(MemberBadgesRepository $memberRepository, BadgeRepository $badgeRepository)
     {
         $this->beConstructedWith($memberRepository, $badgeRepository);
     }
@@ -48,7 +48,7 @@ class AcceptABadgeHandlerSpec extends ObjectBehavior
         $badgeDescription = BadgeDescription::fromString('You unlocked the very rare Michel Sardou badge!');
         $memberName = MemberName::fromString('michel');
 
-        $badgerMember = new Member($memberId, $memberName);
+        $badgerMember = new MemberBadges($memberId, $memberName);
         $memberOption = MemberOption::some($badgerMember);
         $memberRepository->get($memberId)->willReturn($memberOption);
 

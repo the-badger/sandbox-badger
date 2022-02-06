@@ -16,11 +16,7 @@ namespace Badger\SharedSpace\Bus\Query;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/**
- * Not final for testing purpose
- * Adapt Symfony Messenger because dispatch returns an Envelope marked as final.
- */
-class QueryBus
+final class QueryBus
 {
     use HandleTrait;
 

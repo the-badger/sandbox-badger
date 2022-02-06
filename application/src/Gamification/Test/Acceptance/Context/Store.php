@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Badger\Gamification\Test\Acceptance\Context;
 
-use Badger\Gamification\Domain\Member\MemberName;
+use Badger\Gamification\Domain\MemberBadges\MemberName;
 
 final class Store
 {

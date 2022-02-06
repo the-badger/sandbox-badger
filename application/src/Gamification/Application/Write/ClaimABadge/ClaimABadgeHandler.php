@@ -16,35 +16,35 @@ namespace Badger\Gamification\Application\Write\ClaimABadge;
 use Badger\Gamification\Domain\Badge\BadgeDoesNotExistException;
 use Badger\Gamification\Domain\Badge\BadgeId;
 use Badger\Gamification\Domain\Badge\BadgeRepository;
-use Badger\Gamification\Domain\Member\Member;
-use Badger\Gamification\Domain\Member\MemberId;
-use Badger\Gamification\Domain\Member\MemberName;
-use Badger\Gamification\Domain\Member\MemberRepository;
-use Badger\Gamification\Domain\Member\UnexistingMemberException;
+use Badger\Gamification\Domain\MemberBadges\MaybeMember\MemberOption;
+use Badger\Gamification\Domain\MemberBadges\MemberBadges;
+use Badger\Gamification\Domain\MemberBadges\MemberId;
+use Badger\Gamification\Domain\MemberBadges\MemberBadgesRepository;
 use Badger\SharedSpace\Bus\Command\CommandHandler;
 
 final class ClaimABadgeHandler implements CommandHandler
 {
-    private MemberRepository $memberRepository;
+    private MemberBadgesRepository $memberBadgesRepository;
     private BadgeRepository $badgeRepository;
 
-    public function __construct(MemberRepository $memberRepository, BadgeRepository $badgeRepository)
+    public function __construct(MemberBadgesRepository $memberBadgesRepository, BadgeRepository $badgeRepository)
     {
-        $this->memberRepository = $memberRepository;
+        $this->memberBadgesRepository = $memberBadgesRepository;
         $this->badgeRepository = $badgeRepository;
     }
 
     public function __invoke(ClaimABadge $claimABadge): void
     {
-        //$this->memberRepository->save(new Member(MemberId::fromUuidString("fb9916b5-7611-4cc7-a226-130952b226b8"), MemberName::fromString("michel")));
-        //var_dump($this->memberRepository->findByName(MemberName::fromString("michel"))->member());
-
         $memberId = MemberId::fromUuidString($claimABadge->memberId);
-        $memberOption = $this->memberRepository->get($memberId);
+        $memberBadgesOption = $this->memberBadgesRepository->get($memberId);
 
-        if ($memberOption->isEmpty()) {
-            throw new UnexistingMemberException($memberId);
+        //TODO: validate that the user exists before
+        if ($memberBadgesOption->isEmpty()) {
+            $memberBadges = new MemberBadges($memberId);
+            $memberBadgesOption = MemberOption::fromValue($memberBadges);
         }
+
+        $memberBadges = $memberBadgesOption->member();
 
         $badgeId = BadgeId::fromUuidString($claimABadge->badgeId);
         $badgeOption = $this->badgeRepository->get($badgeId);
@@ -53,9 +53,8 @@ final class ClaimABadgeHandler implements CommandHandler
             throw new BadgeDoesNotExistException($badgeId);
         }
 
-        $member = $memberOption->member();
-        $member->claimABadge($badgeId);
+        $memberBadges->claimABadge($badgeId);
 
-        $this->memberRepository->save($member);
+        $this->memberBadgesRepository->save($memberBadges);
     }
 }

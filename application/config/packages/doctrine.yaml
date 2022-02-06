@@ -10,10 +10,12 @@ doctrine:
           badge_id: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeIdType
           badge_title: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeTitleType
           badge_description: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeDescriptionType
-          member_id: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberIdType
-          member_name: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\MemberNameType
-          claimed_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\ClaimedBadgesType
-          earned_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Member\EarnedBadgesType
+          member_id: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\MemberBadges\MemberIdType
+          member_name: Badger\Member\Infrastructure\Storage\Doctrine\Mapping\Member\MemberNameType
+          claimed_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\MemberBadges\ClaimedBadgesType
+          earned_badges: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\MemberBadges\EarnedBadgesType
+          member_score: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\MemberBadges\MemberScoreType
+          badge_score: Badger\Gamification\Infrastructure\Storage\Doctrine\Mapping\Badge\BadgeScoreType
 
     orm:
         auto_generate_proxy_classes: true
@@ -26,9 +28,9 @@ doctrine:
             dir: '%kernel.project_dir%/src/Gamification/Infrastructure/Storage/Doctrine/Mapping/Badge'
             prefix: 'Badger\Gamification\Domain\Badge'
             alias: Gamification
-          Member:
+          MemberBadges:
             is_bundle: false
             type: yml
-            dir: '%kernel.project_dir%/src/Gamification/Infrastructure/Storage/Doctrine/Mapping/Member'
-            prefix: 'Badger\Gamification\Domain\Member'
+            dir: '%kernel.project_dir%/src/Gamification/Infrastructure/Storage/Doctrine/Mapping/MemberBadges'
+            prefix: 'Badger\Gamification\Domain\MemberBadges'
             alias: Gamification
